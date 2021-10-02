@@ -128,6 +128,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LT_ESCAPE LT(_MEDIA,     KC_ESCAPE)
 #define LT_BSPACE LT(_NUM,       KC_BSPACE)
 #define LT_ENTER  LT(_SYM,       KC_ENTER)
+#define LT_DELETE LT(_FN,        KC_DELETE)
 #define LT_F      LT(_MACRO_R2,  KC_F)
 #define LT_P      LT(_MACRO_R1,  KC_P)
 #define LT_L      LT(_MACRO_L1,  KC_L)
@@ -148,10 +149,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `---------------------------------------------------------------------'
  */
 [_COLEMAK] = LAYOUT_planck_grid(
-    TD(D_Q),        KC_W,           LT_F,           LT_P,           KC_G,  KC_NO, KC_NO,   D_J,     LT_L,           LT_U,           KC_Y,           KC_QUOTE,
+    TD(D_Q),        KC_W,           LT_F,           LT_P,           KC_G,  KC_NO, KC_NO,   TD(D_J),     LT_L,       LT_U,           KC_Y,           KC_QUOTE,
     LGUI_T(KC_A),   LALT_T(KC_R),   LCTL_T(KC_S),   LSFT_T(KC_T),   KC_D,  KC_NO, KC_NO,   KC_H,    RSFT_T(KC_N),   RCTL_T(KC_E),   RALT_T(KC_I),   RGUI_T(KC_O),
     KC_Z,           RALT_T(KC_X),   KC_C,           TD(D_V),        KC_B,  KC_NO, KC_NO,  TD(D_K),  LT_M,           KC_COMMA,       LALT_T(KC_DOT), KC_SLASH,
-    KC_NO,          KC_NO,          KC_DELETE,      LT_BSPACE,    LT_ENTER,RESET, RESET,  LT_TAB,   LT_SPACE,       KC_ESCAPE,      KC_NO,          KC_NO
+    KC_NO,          KC_NO,          LT_DELETE,      LT_BSPACE,    LT_ENTER,KC_NO, KC_NO,  LT_TAB,   LT_SPACE,       LT_ESCAPE,      KC_NO,          KC_NO
 ),
 
 
@@ -170,7 +171,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TD(D_Q),        KC_W,           KC_E,           KC_R,           KC_T,  KC_NO, KC_NO,   KC_Y,    KC_U,           KC_I,           KC_O,           KC_P,
     LGUI_T(KC_A),   LALT_T(KC_S),   LCTL_T(KC_D),   LSFT_T(KC_F),   KC_G,  KC_NO, KC_NO,   KC_H,    RSFT_T(KC_J),   RCTL_T(KC_K),   RALT_T(KC_L),   RGUI_T(KC_QUOTE),
     KC_Z,           RALT_T(KC_X),   KC_C,           TD(D_V),        KC_B,  KC_NO, KC_NO,   KC_N,    LT_M,           KC_COMMA,       LALT_T(KC_DOT), KC_SLASH,
-    KC_NO,          KC_NO,          KC_DELETE,      LT_BSPACE,    LT_ENTER,KC_NO, KC_NO,  LT_TAB,   LT_SPACE,       KC_ESCAPE,      KC_NO,          KC_NO
+    KC_NO,          KC_NO,          LT_DELETE,      LT_BSPACE,    LT_ENTER,KC_NO, KC_NO,  LT_TAB,   LT_SPACE,       LT_ESCAPE,      KC_NO,          KC_NO
 ),
 
 /* Dvorak
@@ -188,7 +189,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_QUOTE,     KC_COMMA,    KC_DOT,       KC_P,         KC_Y,     KC_NO,   KC_NO,   KC_F,         KC_G,          KC_C,         KC_R,   KC_L,
     LGUI_T(KC_A), LALT(KC_O),  LCTL_T(KC_E), LSFT_T(KC_U), KC_I,     KC_NO,   KC_NO,   KC_D,  RSFT_T(KC_H),  RCTL_T(KC_T), RALT_T(KC_N),  RGUI_T(KC_S),
     KC_SLASH,     KC_Q,        KC_J,         KC_K,         KC_X,     KC_NO,   KC_NO,   KC_B,         KC_M,          KC_W,         KC_V,   KC_Z,
-    KC_NO,        KC_NO,       KC_DELETE,    LT_BSPACE,   LT_ENTER, KC_NO,   KC_NO,  LT_TAB,         LT_SPACE,      KC_ESCAPE,    KC_NO,  KC_NO
+    KC_NO,        KC_NO,       LT_DELETE,    LT_BSPACE,   LT_ENTER, KC_NO,   KC_NO,  LT_TAB,         LT_SPACE,      LT_ESCAPE,    KC_NO,  KC_NO
 ),
 /* Mouse
  * ,------------------------------------------------------------------------------.
@@ -375,6 +376,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool inColemak = true;
 
+#define HM_A LGUI_T(KC_A)
+#define HM_R LALT_T(KC_R)
+#define HM_S LCTL_T(KC_S)
+#define HM_T LSFT_T(KC_T)
+
+#define HM_N RSFT_T(KC_N)
+#define HM_E RCTL_T(KC_E)
+#define HM_I RALT_T(KC_I)
+#define HM_O RGUI_T(KC_O)
+
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case HM_T:
+  case HM_N:
+    return TAPPING_TERM;
+  default:
+    return TAPPING_TERM + 30;
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
   case QWERTY:
@@ -552,15 +573,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       SEND_STRING(SS_LSFT(SS_TAP(X_COMMA)) SS_TAP(X_MINUS));
     }
     break;
-#define HM_A LGUI_T(KC_A)
-#define HM_R LALT_T(KC_R)
-#define HM_S LCTL_T(KC_S)
-#define HM_T LSFT_T(KC_T)
-
-#define HM_N RSFT_T(KC_N)
-#define HM_E RCTL_T(KC_E)
-#define HM_I RALT_T(KC_I)
-#define HM_O RGUI_T(KC_O)
     
 // http://norvig.com/mayzner.html
 // th = 3.56% (Alternating hand bigram)
@@ -975,5 +987,5 @@ void v_reset(qk_tap_dance_state_t *state, void *user_data) {
     case TD_DOUBLE_SINGLE_TAP: unregister_code(KC_V);
     default: break;
     }
-    vtap_state.state = TD_NONE;
+   vtap_state.state = TD_NONE;
 }
