@@ -43,6 +43,8 @@ enum planck_keycodes {
   DVORAK,
   PLOVER,
   EXT_PLV,
+  KMOUSE,
+  KMOVE,
   ST_MACRO_0,
   ST_MACRO_1,
   ST_MACRO_2,
@@ -206,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_MOUSE] = LAYOUT_planck_grid(
     KC_MS_WH_UP,    KC_MS_WH_LEFT,  KC_MS_UP,       KC_MS_WH_RIGHT, KC_NO,          KC_NO, KC_NO, PLOVER,         DVORAK,         COLEMAK,        QWERTY,    RESET,
     KC_MS_WH_DOWN,  KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    KC_NO,          KC_NO, KC_NO, KC_NO, KC_LSHIFT,  KC_LCTRL, KC_LALT, KC_LGUI,        
-    KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    LCTL(KC_Y),     KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO,    KC_RALT, KC_NO,          
+    KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    LCTL(KC_Y),     KC_NO, KC_NO, KC_NO, KMOUSE,     KC_NO,    KC_RALT, KC_NO,          
     KC_NO,          KC_NO,          KC_MS_BTN3,     KC_MS_BTN2,     KC_MS_BTN1,     KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO,    KC_NO,   KC_NO
   ),
 
@@ -224,7 +226,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_MOVE] = LAYOUT_planck_grid(
     KC_PGUP,        KC_HOME,        KC_UP,          KC_END,         KC_INSERT,      KC_NO, KC_NO, PLOVER,         DVORAK,         COLEMAK,        QWERTY,    RESET, 
     KC_PGDOWN,      KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_CAPSLOCK,    KC_NO, KC_NO, KC_NO,          KC_LSHIFT,      KC_LCTRL,       KC_LALT,  KC_LGUI,        
-    KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    LCTL(KC_Y),     KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_RALT,  KC_NO,          
+    KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    LCTL(KC_Y),     KC_NO, KC_NO, KC_NO,          KMOVE,          KC_NO,          KC_RALT,  KC_NO,          
     KC_NO,          KC_NO,          KC_DELETE,      KC_BSPACE,      KC_ENTER,       KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,    KC_NO
 ),
 /* Media
@@ -287,14 +289,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |-------+-----+-------+------+---+---+---+--------+----+----+----+-----|
  * |       |     |       |      |   |   |   | Pause  | f1 | f2 | f3 | f10 |
  * |-------+-----+-------+------+---+---+---+--------+----+----+----+-----|
- * |       |     |       |      |XXX|       | Tab    | Spc|Apps|    |     |
+ * |       |     |       |      |XXX|       | Apps   | Apps |Apps|    |     |
  * `----------------------------------------------------------------------'
  */
 [_FN] = LAYOUT_planck_grid(
     RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,    KC_NO, KC_NO, KC_PSCREEN,     KC_F7,          KC_F8,          KC_F9,          KC_F12,         
     KC_LGUI,        KC_LALT,   KC_LCTRL,       KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, KC_SCROLLLOCK,  KC_F4,          KC_F5,          KC_F6,          KC_F11,         
     KC_NO,          KC_RALT,   KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_PAUSE,       KC_F1,          KC_F2,          KC_F3,          KC_F10,         
-    KC_NO,          KC_NO,     KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_TAB,         KC_SPACE,       KC_APPLICATION, KC_NO, KC_NO
+    KC_NO,          KC_NO,     KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_APPLICATION,         KC_APPLICATION, KC_APPLICATION, KC_NO, KC_NO
   ),
 
 /*  c+a+num
@@ -396,8 +398,46 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
   }
 }
 
+bool isMouse = false;
+bool isMove = false;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+  case KMOUSE:
+    if (record->event.pressed) {
+      if (isMouse) {
+        if (inColemak) {
+          set_single_persistent_default_layer(_COLEMAK);
+        } else {
+          set_single_persistent_default_layer(_QWERTY);
+        }
+        isMouse = false;
+        isMove = false;
+      } else {
+        set_single_persistent_default_layer(_MOUSE);
+        isMouse = true;
+        isMove = false;
+      }
+    }
+    return false;
+    break;
+  case KMOVE:
+    if (record->event.pressed) {
+      if (isMove) {
+        if (inColemak) {
+          set_single_persistent_default_layer(_COLEMAK);
+        } else {
+          set_single_persistent_default_layer(_QWERTY);
+        }
+        isMouse = false;
+        isMove = false;
+      } else {
+        set_single_persistent_default_layer(_MOVE);
+        isMouse = false;
+        isMove = true;
+      }
+    }
+    return false;
+    break;
   case QWERTY:
     if (record->event.pressed) {
       print("mode just switched to qwerty and this is a huge string\n");
