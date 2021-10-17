@@ -45,7 +45,7 @@ enum planck_keycodes {
   EXT_PLV,
   KMOUSE,
   KMOVE,
-  ST_MACRO_0,
+  M_NA,
   ST_MACRO_1,
   ST_MACRO_2,
   ST_MACRO_3,
@@ -313,23 +313,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_CA_NUM_R] = LAYOUT_planck_grid(
     RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,         KC_NO, KC_NO, LCTL(KC_6),     LCTL(KC_7),     LCTL(KC_8),     LCTL(KC_9),     LCTL(KC_0),     
     KC_LGUI,        KC_LSHIFT,      KC_LSHIFT,      KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, LALT(KC_6),     LALT(KC_7),     LALT(KC_8),     LALT(KC_9),     LALT(KC_0),     
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, LALT(LCTL(KC_6)), LALT(LCTL(KC_7)), LALT(LCTL(KC_8)), LALT(LCTL(KC_9)), LALT(LCTL(KC_0)),           
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_NO,          KC_APPLICATION, KC_NO,          KC_NO,          KC_NO
   ),
 [_CA_NUM_L] = LAYOUT_planck_grid(
     LCTL(KC_1),     LCTL(KC_2),     LCTL(KC_3),     LCTL(KC_4),     LCTL(KC_5),     KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     LALT(KC_1),     LALT(KC_2),     LALT(KC_3),     LALT(KC_4),     LALT(KC_5),     KC_NO, KC_NO, KC_NO,          KC_LSHIFT,      KC_RSHIFT,      KC_RSHIFT,      KC_LGUI,        
-    KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
+    LALT(LCTL(KC_1)), LALT(LCTL(KC_2)), LALT(LCTL(KC_3)), LALT(LCTL(KC_4)), LALT(LCTL(KC_5)), KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_APPLICATION, KC_NO,          KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO
   ),
-[_MACRO_L2] = LAYOUT_planck_grid(
+[_MACRO_R2] = LAYOUT_planck_grid(
     RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,         KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          ST_MACRO_0,     KC_NO,          KC_NO,          KC_NO,          
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          M_NA,           KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          ST_MACRO_1,     KC_NO,          KC_NO,          
     KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          ST_MACRO_2,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
 
-[_MACRO_R2] = LAYOUT_planck_grid(
+[_MACRO_L2] = LAYOUT_planck_grid(
     KC_NO,          KC_NO,          KC_NO,          ST_MACRO_3,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          
     KC_NO,          ST_MACRO_4,     ST_MACRO_5,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
@@ -489,10 +489,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return false;
     break;
-  case ST_MACRO_0:
+  case M_NA:
     if (record->event.pressed) {
-      SEND_STRING(SS_RSFT(SS_TAP(X_N)) SS_LSFT(SS_TAP(X_A)));
-
+      SEND_STRING("NA");
     }
     break;
   case ST_MACRO_1:
