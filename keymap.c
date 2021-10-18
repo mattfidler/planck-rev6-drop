@@ -46,7 +46,7 @@ enum planck_keycodes {
   KMOUSE,
   KMOVE,
   M_NA,
-  ST_MACRO_1,
+  M_NVS,
   ST_MACRO_2,
   ST_MACRO_3,
   ST_MACRO_4,
@@ -300,15 +300,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 /*  c+a+num
- * ,----------------------------------------------------------------------.
- * | Reset |     |       |      |   |   |   | C-6 | C-7 | C-8 | C-9 | C-0 |
- * |-------+-----+-------+------+---+---+---+-----+-----+-----+-----+-----|
- * |  Gui  | Alt |  Ctrl | Shift|   |   |   | M-6 | M-7 | M-8 | M-9 | M-0 |
- * |-------+-----+-------+------+---+---+---+-----+-----+-----+-----+-----|
- * |       |     |       |      |   |   |   |  6  |  7  |  8  |  9  |  0  |
- * |-------+-----+-------+------+---+---+---+-----+-----+-----+-----+-----|
- * |       |     |       |      |XXX|       |     |     | Apps|     |     |
- * `----------------------------------------------------------------------'
+ * ,--------------------------------------------------------------------------------.
+ * | Reset |     |       |      |   |   |   |  C-6  |  C-7  |  C-8  |  C-9  |  C-0  |
+ * |-------+-----+-------+------+---+---+---+-------+-------+-------+-------+-------|
+ * |  Gui  |Shift| Shift | Shift|   |   |   |  M-6  |  M-7  |  M-8  |  M-9  |  M-0  |
+ * |-------+-----+-------+------+---+---+---+-------+-------+-------+-------+-------|
+ * |       |     |       |      |   |   |   | C-M-6 | C-M-7 | C-M-8 | C-M-9 | C-M-0 |
+ * |-------+-----+-------+------+---+---+---+-------+-------+-------+-------+-------|
+ * |       |     |       |      |XXX|       |       |       | Apps  |       |       |
+ * `--------------------------------------------------------------------------------'
  */
 [_CA_NUM_R] = LAYOUT_planck_grid(
     RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,         KC_NO, KC_NO, LCTL(KC_6),     LCTL(KC_7),     LCTL(KC_8),     LCTL(KC_9),     LCTL(KC_0),     
@@ -325,7 +325,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_MACRO_R2] = LAYOUT_planck_grid(
     RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,         KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          M_NA,           KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          ST_MACRO_1,     KC_NO,          KC_NO,          
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          M_NVS,     KC_NO,          KC_NO,          
     KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          ST_MACRO_2,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
 
@@ -494,7 +494,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       SEND_STRING("NA");
     }
     break;
-  case ST_MACRO_1:
+  case M_NVS:
     if (record->event.pressed) {
       SEND_STRING("matt.fidler@novartis.com");
 
