@@ -47,25 +47,25 @@ enum planck_keycodes {
   KMOVE,
   M_NA,
   M_NVS,
-  ST_MACRO_2,
-  ST_MACRO_3,
-  ST_MACRO_4,
-  ST_MACRO_5,
-  ST_MACRO_6,
-  ST_MACRO_7,
-  ST_MACRO_8,
-  ST_MACRO_9,
-  ST_MACRO_10,
-  ST_MACRO_11,
-  ST_MACRO_12,
-  ST_MACRO_13,
-  ST_MACRO_14,
-  ST_MACRO_15,
-  ST_MACRO_16,
-  ST_MACRO_17,
-  ST_MACRO_18,
-  ST_MACRO_19,
-  ST_MACRO_20,
+  M_LARW,
+  M_PRO,
+  M_REAL,
+  M_SXP,
+  M_WPM,
+  M_FALSE,
+  M_PMX,
+  M_AIC,
+  M_RxODE,
+  M_SEXP,
+  M_TRUE,
+  M_DRAFT,
+  M_CRAN,
+  M_BIC,
+  M_NULL,
+  M_INTEGER,
+  M_GMAIL,
+  M_PIPE,
+  M_ASGN,
 };
 
 
@@ -162,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  "   |
+ * | Esc  |   A  |   S  |   D  |   F  |     |   H  |   J  |   K  |   L  |   ;  |  "   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -322,30 +322,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LALT(LCTL(KC_1)), LALT(LCTL(KC_2)), LALT(LCTL(KC_3)), LALT(LCTL(KC_4)), LALT(LCTL(KC_5)), KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_APPLICATION, KC_NO,          KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO
   ),
+
 [_MACRO_R2] = LAYOUT_planck_grid(
     RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,         KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          M_NA,           KC_NO,          KC_NO,          KC_NO,          
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,    KC_NO,          M_NA,           KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          M_NVS,     KC_NO,          KC_NO,          
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          ST_MACRO_2,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          M_LARW,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
 
 [_MACRO_L2] = LAYOUT_planck_grid(
-    KC_NO,          KC_NO,          KC_NO,          ST_MACRO_3,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          
-    KC_NO,          ST_MACRO_4,     ST_MACRO_5,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
+    KC_NO,          KC_NO,          KC_NO,          M_PRO,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          
+    KC_NO,          M_REAL,     M_SXP,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
 [_MACRO_L1] = LAYOUT_planck_grid(
-    KC_NO,          ST_MACRO_6,     ST_MACRO_7,     ST_MACRO_8,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
-    ST_MACRO_9,     ST_MACRO_10,    ST_MACRO_11,    ST_MACRO_12,    ST_MACRO_13,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          ST_MACRO_14,    KC_NO,          ST_MACRO_15,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
+    KC_NO,          M_WPM,     M_FALSE,     M_PMX,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
+    M_AIC,     M_RxODE,    M_SEXP,    M_TRUE,    M_DRAFT,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
+    KC_NO,          KC_NO,          M_CRAN,    KC_NO,          M_BIC,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
 [_MACRO_R1] = LAYOUT_planck_grid(
     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          ST_MACRO_16,    KC_NO,          ST_MACRO_17,    KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          ST_MACRO_18,    ST_MACRO_19,    KC_NO,          
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          ST_MACRO_20,    KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          M_NULL,    KC_NO,          M_INTEGER,    KC_NO,          
+    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          M_GMAIL,    M_PIPE,    KC_NO,          
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          M_ASGN,    KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
   ),
 
 /* Plover layer (http://opensteno.org)
@@ -500,116 +501,115 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     }
     break;
-  case ST_MACRO_2:
+  case M_LARW:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_MINUS) SS_LSFT(SS_TAP(X_DOT)));
+      SEND_STRING("->");
 
     }
     break;
-  case ST_MACRO_3:
+  case M_PRO:
     if (record->event.pressed) {
       SEND_STRING("PROTECT");
 
     }
     break;
-  case ST_MACRO_4:
+  case M_REAL:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_E)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_L)));
+      SEND_STRING("REAL");
 
     }
     break;
-  case ST_MACRO_5:
+  case M_SXP:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_S)) SS_LSFT(SS_TAP(X_X)) SS_LSFT(SS_TAP(X_P)));
+      SEND_STRING("SXP");
 
     }
     break;
-  case ST_MACRO_6:
+  case M_WPM:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_W)) SS_LSFT(SS_TAP(X_P)) SS_LSFT(SS_TAP(X_M)));
+      SEND_STRING("WPM");
 
     }
     break;
-  case ST_MACRO_7:
+  case M_FALSE:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_F)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_L)) SS_LSFT(SS_TAP(X_S)) SS_LSFT(SS_TAP(X_E)));
+      SEND_STRING("FALSE");
 
     }
     break;
-  case ST_MACRO_8:
+  case M_PMX:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_P)) SS_LSFT(SS_TAP(X_M)) SS_LSFT(SS_TAP(X_X)));
+      SEND_STRING("PMX");
 
     }
     break;
-  case ST_MACRO_9:
+  case M_AIC:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_I)) SS_LSFT(SS_TAP(X_C)));
+      SEND_STRING("AIC");
 
     }
     break;
-  case ST_MACRO_10:
+  case M_RxODE:
     if (record->event.pressed) {
-      SEND_STRING(SS_RSFT(SS_TAP(X_R)) SS_TAP(X_X) SS_RSFT(SS_TAP(X_O)) SS_RSFT(SS_TAP(X_D)) SS_RSFT(SS_TAP(X_E)));
+      SEND_STRING("RxODE");
 
     }
     break;
-  case ST_MACRO_11:
+  case M_SEXP:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_S)) SS_LSFT(SS_TAP(X_E)) SS_LSFT(SS_TAP(X_X)) SS_LSFT(SS_TAP(X_P)));
+      SEND_STRING("SEXP");
+    }
+    break;
+  case M_TRUE:
+    if (record->event.pressed) {
+      SEND_STRING("TRUE");
 
     }
     break;
-  case ST_MACRO_12:
+  case M_DRAFT:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_T)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_U)) SS_LSFT(SS_TAP(X_E)));
+      SEND_STRING("DRAFT");
 
     }
     break;
-  case ST_MACRO_13:
+  case M_CRAN:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_D)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_F)) SS_LSFT(SS_TAP(X_T)));
+      SEND_STRING("CRAN");
 
     }
     break;
-  case ST_MACRO_14:
+  case M_BIC:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_C)) SS_LSFT(SS_TAP(X_R)) SS_LSFT(SS_TAP(X_A)) SS_LSFT(SS_TAP(X_N)));
+      SEND_STRING("BIC");
 
     }
     break;
-  case ST_MACRO_15:
+  case M_NULL:
     if (record->event.pressed) {
-      SEND_STRING(SS_TAP(X_B) SS_TAP(X_I) SS_TAP(X_C));
+      SEND_STRING("NULL");
 
     }
     break;
-  case ST_MACRO_16:
-    if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_N)) SS_LSFT(SS_TAP(X_U)) SS_LSFT(SS_TAP(X_L)) SS_LSFT(SS_TAP(X_L)));
-
-    }
-    break;
-  case ST_MACRO_17:
+  case M_INTEGER:
     if (record->event.pressed) {
       SEND_STRING("INTEGER");
 
     }
     break;
-  case ST_MACRO_18:
+  case M_GMAIL:
     if (record->event.pressed) {
       SEND_STRING("matthew.fidler@gmail.com");
 
     }
     break;
-  case ST_MACRO_19:
+  case M_PIPE:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_5)) SS_LSFT(SS_TAP(X_DOT)) SS_LSFT(SS_TAP(X_5)));
+      SEND_STRING("%>%");
     }
     break;
-  case ST_MACRO_20:
+  case M_ASGN:
     if (record->event.pressed) {
-      SEND_STRING(SS_LSFT(SS_TAP(X_COMMA)) SS_TAP(X_MINUS));
+      SEND_STRING("<-");
     }
     break;
     
