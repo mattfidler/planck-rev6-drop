@@ -173,6 +173,13 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define Q_RIGHT KC_RIGHT
 #define Q_CAPS KC_CAPSLOCK
 
+#define VOL_UP KC_AUDIO_VOL_UP
+#define PREV KC_MEDIA_PREV_TRACK
+#define VOL_DOWN KC_AUDIO_VOL_DOWN
+#define NEXT KC_MEDIA_NEXT_TRACK
+#define MUTE KC_AUDIO_MUTE
+#define PLAY KC_MEDIA_PLAY_PAUSE
+#define STOP KC_MEDIA_STOP
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_COLEMAK] = LAYOUT_matt(
@@ -197,18 +204,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                MS_3,   MS_2,   MS_1,          KC_NO,  KC_NO,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
-
-/* Move
- * ,------------------------------------------------------------------------------.
- * | PgUp  | Home |  ^   |  End  |  Ins  |   |   |   |       |      |     | Reset |
- * |-------+------+------+-------+-------+---+---+---+-------+------+-----+-------|
- * | PgDwn |  <-  |  v   |   ->  | Caps  |   |   |   | Shift | Ctrl | Alt | Gui   |
- * |-------+------+------+-------+-------+---+---+---+-------+------+-----+-------|
- * | Undo  | Cut  | Copy | Paste | Redo  |   |   |   |       |      |     | End   | 
- * |----- -+------+------+-------+-------+---+---+---+-------+------+-----+-------|
- * |       |      |  Del |  Bksp | Enter |       |   |       |XXXXXX|     |       |
- * `------------------------------------------------------------------------------'
- */
 [_MOVE] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
     KC_PGUP,KC_HOME,  KC_UP, KC_END,  Q_INS,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
@@ -221,23 +216,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //                        |-------+-------+-------|       |-------+-------+-------|
 
 ),
-/* Media
- * ,------------------------------------------------------------------------------.
- * | VaIn  | Spd  | VolUp | Spi  |  Ins  |   |   |   |       |      |     | Reset |
- * |-------+------+-------+------+-------+---+---+---+-------+------+-----+-------|
- * | VaDw  | Prev | VolDwn| Next | Caps  |   |   |   | Shift | Ctrl | Alt | Gui   |
- * |-------+------+-------+------+-------+---+---+---+-------+------+-----+-------|
- * | RGB   | MOD  | Hud   | Hui  | MOD   |   |   |   |       |      |     |       | 
- * |----- -+------+-------+------+-------+---+---+---+-------+------+-----+-------|
- * |       |      |  Mute | Play | Stop  |       |   |       |      |XXXXX|       |
- * `------------------------------------------------------------------------------'
- */
-
-[_MEDIA] = LAYOUT_planck_grid(
-    RGB_VAI,        RGB_SPD,        KC_AUDIO_VOL_UP,RGB_SPI,        KC_NO,          KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,    RESET,
-    RGB_VAD,        KC_MEDIA_PREV_TRACK,KC_AUDIO_VOL_DOWN,KC_MEDIA_NEXT_TRACK,KC_NO,          KC_NO, KC_NO, KC_NO,          KC_LSHIFT,      KC_LCTRL,       KC_LALT,        KC_LGUI,
-    RGB_TOG,        RGB_MOD,        RGB_HUD,        RGB_HUI,        RGB_MOD,        KC_NO, KC_NO, KC_NO,          KC_NO, KC_NO,          KC_RALT,        KC_NO,          
-    KC_NO, KC_NO, KC_AUDIO_MUTE,  KC_MEDIA_PLAY_PAUSE,KC_MEDIA_STOP,  KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_NO
+[_MEDIA] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------.
+    RGB_VAI,RGB_SPD, VOL_UP,RGB_SPI,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+    RGB_VAD,   PREV,VOL_DOWN,  NEXT,  KC_NO,                          KC_NO,QLSHIFT, QLCTRL, QLALT,   QLGUI,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+    RGB_TOG,RGB_MOD,RGB_HUD,RGB_HUI,RGB_MOD,                          KC_NO,  KC_NO,  KC_NO,  QRALT,  KC_NO,          
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                               MUTE,   PLAY,   STOP,          KC_NO,  KC_NO,  KC_NO
+ //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 /* Number Layer
  * ,------------------------------------------------------------.
@@ -342,12 +330,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
-
 /* layer_state_t layer_state_set_user(layer_state_t state) { */
 /*   return update_tri_layer_state(state, _LOWER, _KC_NO, _ADJUST); */
 /* } */
-
-bool inColemak = true;
 
 #define HM_A LGUI_T(KC_A)
 #define HM_R LALT_T(KC_R)
@@ -571,7 +556,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // common bigraphs that contain home row mods on same hand
     // ou, in, st, en
   case HM_R:
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
 	// or = 1.28% Alternating hand // run command redundant with simple windows key
 	unregister_mods(MOD_BIT(KC_RGUI));
@@ -591,7 +576,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
   case LT_F:
     //// of = 1.17% Alternating hand // win + f
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
 	unregister_mods(MOD_BIT(KC_RGUI));
 	tap_code(KC_O);
@@ -603,7 +588,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
   case LT_L:
     //al = 1.09% Alternating hand
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_LGUI)) {
 	unregister_mods(MOD_BIT(KC_LGUI));
 	tap_code(KC_A);
@@ -615,14 +600,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
   case LT_M:
     // om bigraph
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
 	unregister_mods(MOD_BIT(KC_RGUI));
 	tap_code(KC_O);
 	tap_code(KC_M);
 	add_mods(MOD_BIT(KC_RGUI));
 	return false;
-      } else if (inColemak && get_mods() & MOD_BIT(KC_RCTL)) {
+      } else if (get_mods() & MOD_BIT(KC_RCTL)) {
 	// em bigraph
 	unregister_mods(MOD_BIT(KC_RCTL));
 	tap_code(KC_E);
@@ -634,7 +619,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
   case LT_U:
     // handle ou case and send ou for gui right+u
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
 	// ou = 0.87%
 	unregister_mods(MOD_BIT(KC_RGUI));
@@ -647,7 +632,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true; 
   case HM_T:
     // handles st
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_LGUI)) {
 	// handle at 1.49%
 	unregister_mods(MOD_BIT(KC_LGUI));
@@ -655,7 +640,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 	tap_code(KC_T);
 	unregister_mods(MOD_BIT(KC_LGUI));
 	return false;
-      } else if (inColemak && get_mods() & MOD_BIT(KC_LCTL)) {
+      } else if (get_mods() & MOD_BIT(KC_LCTL)) {
 	// handle st 1.05%
 	unregister_mods(MOD_BIT(KC_LCTL));
 	tap_code(KC_S);
@@ -667,7 +652,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true; 
   case HM_N:
     // handle en and in
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       uint8_t current_mods = get_mods();
       if (current_mods & MOD_BIT(KC_RALT)) {
 	// in 2.43%
@@ -701,7 +686,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
   case HM_S:
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_LGUI)) {
 	// as 0.87%
 	unregister_mods(MOD_BIT(KC_LGUI));
@@ -713,7 +698,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true;
     }
   case HM_O:
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RALT)) {
 	// handle io 0.83%
 	unregister_mods(MOD_BIT(KC_RALT));
@@ -725,7 +710,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
   case HM_E:
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RSHIFT)) {
 	// ne
 	unregister_mods(MOD_BIT(KC_RSHIFT));
@@ -737,7 +722,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
   case HM_A:
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RALT)) {
 	// ra
 	unregister_mods(MOD_BIT(KC_RALT));
@@ -749,7 +734,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
   case LT_SPC:
-    if (inColemak && record->tap.count > 0) {
+    if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RSHIFT)) {
 	// n 
 	unregister_mods(MOD_BIT(KC_RSHIFT));
