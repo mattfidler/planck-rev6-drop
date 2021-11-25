@@ -168,6 +168,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define PASTE  KC_PC_PASTE
 #define REDO LCTL(KC_Y)
 
+#define Q_INS KC_INSERT
+#define PG_DOWN KC_PGDOWN
+#define Q_RIGHT KC_RIGHT
+#define Q_CAPS KC_CAPSLOCK
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -205,11 +209,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |       |      |  Del |  Bksp | Enter |       |   |       |XXXXXX|     |       |
  * `------------------------------------------------------------------------------'
  */
-[_MOVE] = LAYOUT_planck_grid(
-    KC_PGUP,        KC_HOME,        KC_UP,          KC_END,         KC_INSERT,      KC_NO, KC_NO, KC_NO,         KC_NO,         KC_NO,        KC_NO,    RESET, 
-    KC_PGDOWN,      KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_CAPSLOCK,    KC_NO, KC_NO, KC_NO,          KC_LSHIFT,      KC_LCTRL,       KC_LALT,  KC_LGUI,        
-    KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    LCTL(KC_Y),     KC_NO, KC_NO, KC_NO,          KMOVE,          KC_NO,          KC_RALT,  KC_NO,          
-    KC_NO,          KC_NO,          KC_DELETE,      KC_BSPACE,      KC_ENTER,       KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,    KC_NO
+[_MOVE] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------.
+    KC_PGUP,KC_HOME,  KC_UP, KC_END,  Q_INS,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+    PG_DOWN,KC_LEFT,KC_DOWN,Q_RIGHT, Q_CAPS,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,        
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       UNDO,    CUT,   COPY,  PASTE,   REDO,                          KC_NO,  KMOVE,  KC_NO,  QRALT,  KC_NO,
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                       KC_DELETE,  KC_BSPACE, KC_ENTER,       KC_NO, KC_NO, KC_NO
+ //                        |-------+-------+-------|       |-------+-------+-------|
+
 ),
 /* Media
  * ,------------------------------------------------------------------------------.
