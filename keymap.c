@@ -344,11 +344,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                KC_NO,  KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
   //                        |-------+-------+-------|       |-------+-------+-------|
   ),
-[_MACRO_L1] = LAYOUT_planck_grid(
-    KC_NO,          M_WPM,     M_FALSE,     M_PMX,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
-    M_AIC,     M_RxODE,    M_SEXP,    M_TRUE,    M_DRAFT,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          M_CRAN,    KC_NO,          M_BIC,    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
+[_MACRO_L1] = LAYOUT_matt(
+  //,---------------------------------------.                       ,---------------------------------------
+       KC_NO,  M_WPM,M_FALSE,  M_PMX,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       M_AIC,M_RxODE, M_SEXP, M_TRUE,M_DRAFT,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       KC_NO,  KC_NO, M_CRAN,  KC_NO,  M_BIC,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                              KC_NO,   KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
+  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 [_MACRO_R1] = LAYOUT_planck_grid(
     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
