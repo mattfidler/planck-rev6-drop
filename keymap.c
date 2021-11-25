@@ -295,9 +295,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                  KC_SCROLLLOCK,  KC_F4,  KC_F5,  KC_F6, KC_F11,         
   //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
        KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                       KC_PAUSE,  KC_F1,  KC_F2,  KC_F3, KC_F10,         
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                               KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
- //                        |-------+-------+-------|       |-------+-------+-------|
+  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 [_CA_NUM_R] = LAYOUT_matt(
   //,---------------------------------------.                       ,---------------------------------------
@@ -306,9 +306,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,     
   //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         ACTL_6, ACTL_7, ACTL_8, ACTL_9, ACTL_0,           
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                               KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
- //                        |-------+-------+-------|       |-------+-------+-------|
+  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 [_CA_NUM_L] = LAYOUT_matt(
   //,---------------------------------------.                       ,---------------------------------------
@@ -317,9 +317,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,        
   //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
       ACTL_1, ACTL_2, ACTL_3, ACTL_4, ACTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
+  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
                                APPS,   APPS,   APPS,          KC_NO,  KC_NO,  KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
+  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 [_MACRO_R2] = LAYOUT_matt(
   //,---------------------------------------.                       ,---------------------------------------
@@ -328,16 +328,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,   M_NA,  KC_NO,  KC_NO,  KC_NO,          
   //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
        KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  M_NVS,  KC_NO,  KC_NO,          
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
+  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
                               KC_NO, KC_NO,  KC_NO,          M_LARW,  KC_NO,  KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
+  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 
-[_MACRO_L2] = LAYOUT_planck_grid(
-    KC_NO,          KC_NO,          KC_NO,          M_PRO,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          
-    KC_NO,          M_REAL,     M_SXP,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
+[_MACRO_L2] = LAYOUT_matt(
+  //,---------------------------------------.                       ,---------------------------------------
+       KC_NO,  KC_NO,  KC_NO, M_PRO,   KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       KC_NO, M_REAL,  M_SXP,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                               KC_NO,  KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
+  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 [_MACRO_L1] = LAYOUT_planck_grid(
     KC_NO,          M_WPM,     M_FALSE,     M_PMX,     KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
