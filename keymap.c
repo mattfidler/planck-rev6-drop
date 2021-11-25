@@ -157,6 +157,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define MS_3 KC_MS_BTN3
 
 #define QLSHIFT KC_LSHIFT
+#define QRSHIFT KC_RSHIFT
 #define QLCTRL KC_LCTRL
 #define QLALT  KC_LALT
 #define QLGUI KC_LGUI
@@ -185,6 +186,39 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define RBRACKET KC_RBRACKET
 
 #define APPS KC_APPLICATION
+
+#define CTL_1 LCTL(KC_1)
+#define CTL_2 LCTL(KC_2)
+#define CTL_3 LCTL(KC_3)
+#define CTL_4 LCTL(KC_4)
+#define CTL_5 LCTL(KC_5)
+#define CTL_6 LCTL(KC_6)
+#define CTL_7 LCTL(KC_7)
+#define CTL_8 LCTL(KC_8)
+#define CTL_9 LCTL(KC_9)
+#define CTL_0 LCTL(KC_0)
+
+#define ALT_1 LALT(KC_1)
+#define ALT_2 LALT(KC_2)
+#define ALT_3 LALT(KC_3)
+#define ALT_4 LALT(KC_4)
+#define ALT_5 LALT(KC_5)
+#define ALT_6 LALT(KC_6)
+#define ALT_7 LALT(KC_7)
+#define ALT_8 LALT(KC_8)
+#define ALT_9 LALT(KC_9)
+#define ALT_0 LALT(KC_0)
+
+#define ACTL_1 LALT(LCTL(KC_1))
+#define ACTL_2 LALT(LCTL(KC_2))
+#define ACTL_3 LALT(LCTL(KC_3))
+#define ACTL_4 LALT(LCTL(KC_4))
+#define ACTL_5 LALT(LCTL(KC_5))
+#define ACTL_6 LALT(LCTL(KC_6))
+#define ACTL_7 LALT(LCTL(KC_7))
+#define ACTL_8 LALT(LCTL(KC_8))
+#define ACTL_9 LALT(LCTL(KC_9))
+#define ACTL_0 LALT(LCTL(KC_0))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_COLEMAK] = LAYOUT_matt(
@@ -265,29 +299,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
-
-/*  c+a+num
- * ,--------------------------------------------------------------------------------.
- * | Reset |     |       |      |   |   |   |  C-6  |  C-7  |  C-8  |  C-9  |  C-0  |
- * |-------+-----+-------+------+---+---+---+-------+-------+-------+-------+-------|
- * |  Gui  |Shift| Shift | Shift|   |   |   |  M-6  |  M-7  |  M-8  |  M-9  |  M-0  |
- * |-------+-----+-------+------+---+---+---+-------+-------+-------+-------+-------|
- * |       |     |       |      |   |   |   | C-M-6 | C-M-7 | C-M-8 | C-M-9 | C-M-0 |
- * |-------+-----+-------+------+---+---+---+-------+-------+-------+-------+-------|
- * |       |     |       |      |XXX|       |       |       | Apps  |       |       |
- * `--------------------------------------------------------------------------------'
- */
-[_CA_NUM_R] = LAYOUT_planck_grid(
-    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,         KC_NO, KC_NO, LCTL(KC_6),     LCTL(KC_7),     LCTL(KC_8),     LCTL(KC_9),     LCTL(KC_0),     
-    KC_LGUI,        KC_LSHIFT,      KC_LSHIFT,      KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, LALT(KC_6),     LALT(KC_7),     LALT(KC_8),     LALT(KC_9),     LALT(KC_0),     
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, LALT(LCTL(KC_6)), LALT(LCTL(KC_7)), LALT(LCTL(KC_8)), LALT(LCTL(KC_9)), LALT(LCTL(KC_0)),           
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_NO,          KC_APPLICATION, KC_NO,          KC_NO,          KC_NO
+[_CA_NUM_R] = LAYOUT_matt(
+  //,---------------------------------------.                       ,---------------------------------------
+       RESET,  KC_NO, KC_NO,   KC_NO,  KC_NO,                          CTL_6,  CTL_7,  CTL_8,  CTL_9,  CTL_0,
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,     
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         ACTL_6, ACTL_7, ACTL_8, ACTL_9, ACTL_0,           
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                              KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
+ //                        |-------+-------+-------|       |-------+-------+-------|
   ),
-[_CA_NUM_L] = LAYOUT_planck_grid(
-    LCTL(KC_1),     LCTL(KC_2),     LCTL(KC_3),     LCTL(KC_4),     LCTL(KC_5),     KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    LALT(KC_1),     LALT(KC_2),     LALT(KC_3),     LALT(KC_4),     LALT(KC_5),     KC_NO, KC_NO, KC_NO,          KC_LSHIFT,      KC_RSHIFT,      KC_RSHIFT,      KC_LGUI,        
-    LALT(LCTL(KC_1)), LALT(LCTL(KC_2)), LALT(LCTL(KC_3)), LALT(LCTL(KC_4)), LALT(LCTL(KC_5)), KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_APPLICATION, KC_NO,          KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO
+[_CA_NUM_L] = LAYOUT_matt(
+  //,---------------------------------------.                       ,---------------------------------------
+       CTL_1,  CTL_2,  CTL_3,  CTL_4,  CTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,        
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      ACTL_1, ACTL_2, ACTL_3, ACTL_4, ACTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
+                               APPS,   APPS,   APPS,          KC_NO,  KC_NO,  KC_NO
+ //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 
 [_MACRO_R2] = LAYOUT_planck_grid(
