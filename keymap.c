@@ -20,8 +20,6 @@
 
 enum planck_layers {
   _COLEMAK,
-  _QWERTY,
-  _DVORAK,
   _MOUSE,
   _MOVE,
   _MEDIA,
@@ -33,16 +31,11 @@ enum planck_layers {
   _MACRO_L2,
   _MACRO_R2,
   _MACRO_L1,
-  _MACRO_R1,
-  _PLOVER
+  _MACRO_R1
 };
 
 enum planck_keycodes {
-  QWERTY = SAFE_RANGE,
-  COLEMAK,
-  DVORAK,
-  PLOVER,
-  EXT_PLV,
+  COLEMAK= SAFE_RANGE,
   KMOUSE,
   KMOVE,
   M_NA,
@@ -153,17 +146,6 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-/* Colemak
- * ,---------------------------------------------------------------------.
- * | Q | W |  F  |   P  |   G  |      |      |  J  |  L  |   U |  Y  | ' |
- * |-------+-----+------+------+------+------+-----+-----+-----+-----+---|
- * | A | R |  S  |   T  |   D  |      |      |  H  |  N  |   E |  I  | O |
- * |---+---+-----+------+------+------+------+-----+-----+-----+-----+---|
- * | Z | X |  C  |   V  |   B  |      |      |  N  |  M  |   , |  .  | / |
- * |---+---+-----+------+------+------+------+-----+-----+-----+-----+---|
- * |   |   | Del | Bspc |Enter |    Reset    | Tab | Spc | Esc |     |   |
- * `---------------------------------------------------------------------'
- */
 [_COLEMAK] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
     TD(D_Q),   KC_W,   LT_F,   LT_P,   KC_G,                        TD(D_J),   LT_L,   LT_U,   KC_Y,  Q_QUO,
@@ -174,41 +156,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                              LT_DEL, LT_BSP, LT_RET,         LT_TAB, LT_SPC, LT_ESC
  //                        |-------+-------+-------|       |-------+-------+-------|
-),
-/* Qwerty
- * ,-----------------------------------------------------------------------------------.
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |   A  |   S  |   D  |   F  |     |   H  |   J  |   K  |   L  |   ;  |  "   |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
- * `-----------------------------------------------------------------------------------'
- */
-[_QWERTY] = LAYOUT_planck_grid(
-    TD(D_Q),        KC_W,           KC_E,           KC_R,           KC_T,  KC_NO, KC_NO,   KC_Y,    KC_U,           KC_I,           KC_O,           KC_P,
-    LGUI_T(KC_A),   LALT_T(KC_S),   LCTL_T(KC_D),   LSFT_T(KC_F),   KC_G,  KC_NO, KC_NO,   KC_H,    RSFT_T(KC_J),   RCTL_T(KC_K),   RALT_T(KC_L),   RGUI_T(KC_QUOTE),
-    KC_Z,           RALT_T(KC_X),   KC_C,           TD(D_V),        KC_B,  KC_NO, KC_NO,   KC_N,    LT_M,           KC_COMMA,       LALT_T(KC_DOT), KC_SLASH,
-    KC_NO,          KC_NO,          LT_DEL,      LT_BSP,    LT_RET,KC_NO, KC_NO,  LT_TAB,   LT_SPC,       LT_ESC,      KC_NO,          KC_NO
-),
-
-/* Dvorak
- * ,-----------------------------------------------------------------------------------.
- * | Tab  |   "  |   ,  |   .  |   P  |   Y  |   F  |   G  |   C  |   R  |   L  | Bksp |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |   A  |   O  |   E  |   U  |   I  |   D  |   H  |   T  |   N  |   S  |  /   |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Shift|   ;  |   Q  |   J  |   K  |   X  |   B  |   M  |   W  |   V  |   Z  |Enter |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    |Raise | Left | Down |  Up  |Right |
- * `-----------------------------------------------------------------------------------'
- */
-[_DVORAK] = LAYOUT_planck_grid(
-    KC_QUOTE,     KC_COMMA,    KC_DOT,       KC_P,         KC_Y,     KC_NO,   KC_NO,   KC_F,         KC_G,          KC_C,         KC_R,   KC_L,
-    LGUI_T(KC_A), LALT(KC_O),  LCTL_T(KC_E), LSFT_T(KC_U), KC_I,     KC_NO,   KC_NO,   KC_D,  RSFT_T(KC_H),  RCTL_T(KC_T), RALT_T(KC_N),  RGUI_T(KC_S),
-    KC_SLASH,     KC_Q,        KC_J,         KC_K,         KC_X,     KC_NO,   KC_NO,   KC_B,         KC_M,          KC_W,         KC_V,   KC_Z,
-    KC_NO,        KC_NO,       LT_DEL,    LT_BSP,   LT_RET, KC_NO,   KC_NO,  LT_TAB,         LT_SPC,      LT_ESC,    KC_NO,  KC_NO
 ),
 /* Mouse
  * ,------------------------------------------------------------------------------.
@@ -223,7 +170,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_MOUSE] = LAYOUT_planck_grid(
-    KC_MS_WH_UP,    KC_MS_WH_LEFT,  KC_MS_UP,       KC_MS_WH_RIGHT, KC_NO,          KC_NO, KC_NO, PLOVER,         DVORAK,         COLEMAK,        QWERTY,    RESET,
+    KC_MS_WH_UP,    KC_MS_WH_LEFT,  KC_MS_UP,       KC_MS_WH_RIGHT, KC_NO,          KC_NO, KC_NO, KC_NO,         KC_NO,         KC_NO,        KC_NO,    RESET,
     KC_MS_WH_DOWN,  KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    KC_NO,          KC_NO, KC_NO, KC_NO, KC_LSHIFT,  KC_LCTRL, KC_LALT, KC_LGUI,        
     KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    LCTL(KC_Y),     KC_NO, KC_NO, KC_NO, KMOUSE,     KC_NO,    KC_RALT, KC_NO,          
     KC_NO,          KC_NO,          KC_MS_BTN3,     KC_MS_BTN2,     KC_MS_BTN1,     KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO,    KC_NO,   KC_NO
@@ -241,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `------------------------------------------------------------------------------'
  */
 [_MOVE] = LAYOUT_planck_grid(
-    KC_PGUP,        KC_HOME,        KC_UP,          KC_END,         KC_INSERT,      KC_NO, KC_NO, PLOVER,         DVORAK,         COLEMAK,        QWERTY,    RESET, 
+    KC_PGUP,        KC_HOME,        KC_UP,          KC_END,         KC_INSERT,      KC_NO, KC_NO, KC_NO,         KC_NO,         KC_NO,        KC_NO,    RESET, 
     KC_PGDOWN,      KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_CAPSLOCK,    KC_NO, KC_NO, KC_NO,          KC_LSHIFT,      KC_LCTRL,       KC_LALT,  KC_LGUI,        
     KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    LCTL(KC_Y),     KC_NO, KC_NO, KC_NO,          KMOVE,          KC_NO,          KC_RALT,  KC_NO,          
     KC_NO,          KC_NO,          KC_DELETE,      KC_BSPACE,      KC_ENTER,       KC_NO, KC_NO, KC_NO,          KC_NO,          KC_NO,          KC_NO,    KC_NO
@@ -276,7 +223,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `------------------------------------------------------------'
  */
 [_NUM] = LAYOUT_planck_grid(
-    RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,         KC_NO, KC_NO, KC_LBRACKET,    KC_7,           KC_8,           KC_9,           KC_RBRACKET,    
+    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,         KC_NO, KC_NO, KC_LBRACKET,    KC_7,           KC_8,           KC_9,           KC_RBRACKET,    
     KC_LGUI,        KC_LALT,        KC_LCTRL,       KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, KC_EQUAL,       KC_4,           KC_5,           KC_6,           KC_SCOLON,      
     KC_NO,          KC_RALT,        KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_BSLASH,      KC_1,           KC_2,           KC_3,           KC_GRAVE,       
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_MINUS,       KC_0,           KC_DOT,         KC_NO,          KC_NO
@@ -293,7 +240,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `------------------------------------------------------------'
  */
 [_SYM] = LAYOUT_planck_grid(
-    RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,          KC_NO, KC_NO, KC_LCBR,        KC_AMPR,        KC_ASTR,        KC_LPRN,        KC_RCBR,        
+    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,          KC_NO, KC_NO, KC_LCBR,        KC_AMPR,        KC_ASTR,        KC_LPRN,        KC_RCBR,        
     KC_LGUI,        KC_LALT,        KC_LCTRL,       KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, KC_PLUS,        KC_DLR,         KC_PERC,        KC_CIRC,        KC_COLN,        
     KC_NO,          KC_RALT,        KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_PIPE,        KC_EXLM,        KC_AT,          KC_HASH,        KC_TILD,        
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_UNDS,        KC_LPRN,        KC_RPRN,        KC_NO,          KC_NO
@@ -310,7 +257,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `----------------------------------------------------------------------'
  */
 [_FN] = LAYOUT_planck_grid(
-    RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,    KC_NO, KC_NO, KC_PSCREEN,     KC_F7,          KC_F8,          KC_F9,          KC_F12,         
+    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,    KC_NO, KC_NO, KC_PSCREEN,     KC_F7,          KC_F8,          KC_F9,          KC_F12,         
     KC_LGUI,        KC_LALT,   KC_LCTRL,       KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, KC_SCROLLLOCK,  KC_F4,          KC_F5,          KC_F6,          KC_F11,         
     KC_NO,          KC_RALT,   KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_PAUSE,       KC_F1,          KC_F2,          KC_F3,          KC_F10,         
     KC_NO,          KC_NO,     KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_APPLICATION,         KC_APPLICATION, KC_APPLICATION, KC_NO, KC_NO
@@ -328,7 +275,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `--------------------------------------------------------------------------------'
  */
 [_CA_NUM_R] = LAYOUT_planck_grid(
-    RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,         KC_NO, KC_NO, LCTL(KC_6),     LCTL(KC_7),     LCTL(KC_8),     LCTL(KC_9),     LCTL(KC_0),     
+    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,         KC_NO, KC_NO, LCTL(KC_6),     LCTL(KC_7),     LCTL(KC_8),     LCTL(KC_9),     LCTL(KC_0),     
     KC_LGUI,        KC_LSHIFT,      KC_LSHIFT,      KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, LALT(KC_6),     LALT(KC_7),     LALT(KC_8),     LALT(KC_9),     LALT(KC_0),     
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, LALT(LCTL(KC_6)), LALT(LCTL(KC_7)), LALT(LCTL(KC_8)), LALT(LCTL(KC_9)), LALT(LCTL(KC_0)),           
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_NO,          KC_APPLICATION, KC_NO,          KC_NO,          KC_NO
@@ -341,7 +288,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
 [_MACRO_R2] = LAYOUT_planck_grid(
-    RESET,          QWERTY,         COLEMAK,        DVORAK,         PLOVER,         KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
+    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,         KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,    KC_NO,          M_NA,           KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          M_NVS,     KC_NO,          KC_NO,          
     KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          M_LARW,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
@@ -364,31 +311,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          M_NULL,    KC_NO,          M_INTEGER,    KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          M_GMAIL,    M_PIPE,    KC_NO,          
     KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          M_ASGN,    KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
-  ),
-
-/* Plover layer (http://opensteno.org)
- * ,-----------------------------------------------------------------------------------.
- * |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |   #  |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |   S  |   T  |   P  |   H  |   *  |   *  |   F  |   P  |   L  |   T  |   D  |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |   S  |   K  |   W  |   R  |   *  |   *  |   R  |   B  |   G  |   S  |   Z  |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Exit |      |      |   A  |   O  |             |   E  |   U  |      |      |      |
- * `-----------------------------------------------------------------------------------'
- */
-[_PLOVER] = LAYOUT_planck_grid(
-    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1,    KC_1   ,
-    XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
-    XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-    EXT_PLV, XXXXXXX, XXXXXXX, KC_C,    KC_V,    XXXXXXX, XXXXXXX, KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX
-)
+  )
 };
 
-#ifdef AUDIO_ENABLE
-  float plover_song[][2]     = SONG(PLOVER_SOUND);
-  float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
-#endif
 
 /* layer_state_t layer_state_set_user(layer_state_t state) { */
 /*   return update_tri_layer_state(state, _LOWER, _KC_NO, _ADJUST); */
@@ -423,11 +348,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case KMOUSE:
     if (record->event.pressed) {
       if (isMouse) {
-        if (inColemak) {
-          set_single_persistent_default_layer(_COLEMAK);
-        } else {
-          set_single_persistent_default_layer(_QWERTY);
-        }
+        set_single_persistent_default_layer(_COLEMAK);
         isMouse = false;
         isMove = false;
       } else {
@@ -441,11 +362,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case KMOVE:
     if (record->event.pressed) {
       if (isMove) {
-        if (inColemak) {
-          set_single_persistent_default_layer(_COLEMAK);
-        } else {
-          set_single_persistent_default_layer(_QWERTY);
-        }
+        set_single_persistent_default_layer(_COLEMAK);
         isMouse = false;
         isMove = false;
       } else {
@@ -453,57 +370,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         isMouse = false;
         isMove = true;
       }
-    }
-    return false;
-    break;
-  case QWERTY:
-    if (record->event.pressed) {
-      print("mode just switched to qwerty and this is a huge string\n");
-      set_single_persistent_default_layer(_QWERTY);
-      inColemak=false;
-    }
-    return false;
-    break;
-  case COLEMAK:
-    if (record->event.pressed) {
-      set_single_persistent_default_layer(_COLEMAK);
-      inColemak=true;
-    }
-    return false;
-    break;
-  case DVORAK:
-    if (record->event.pressed) {
-      set_single_persistent_default_layer(_DVORAK);
-      inColemak=false;
-    }
-    return false;
-    break;
-  case PLOVER:
-    if (record->event.pressed) {
-#ifdef AUDIO_ENABLE
-      stop_all_notes();
-      PLAY_SONG(plover_song);
-#endif
-      /* layer_off(_KC_NO); */
-      /* layer_off(_LOWER); */
-      /* layer_off(_ADJUST); */
-      layer_on(_PLOVER);
-      if (!eeconfig_is_enabled()) {
-        eeconfig_init();
-      }
-      keymap_config.raw = eeconfig_read_keymap();
-      keymap_config.nkro = 1;
-      eeconfig_update_keymap(keymap_config.raw);
-      inColemak=false;
-    }
-    return false;
-    break;
-  case EXT_PLV:
-    if (record->event.pressed) {
-#ifdef AUDIO_ENABLE
-      PLAY_SONG(plover_gb_song);
-#endif
-      layer_off(_PLOVER);
     }
     return false;
     break;
@@ -899,38 +765,6 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     }
   }
   return true;
-}
-
-bool dip_switch_update_user(uint8_t index, bool active) {
-    switch (index) {
-        case 0: {
-#ifdef AUDIO_ENABLE
-            static bool play_sound = false;
-#endif
-            if (active) {
-#ifdef AUDIO_ENABLE
-                if (play_sound) { PLAY_SONG(plover_song); }
-#endif
-                /* layer_on(_ADJUST); */
-            } else {
-#ifdef AUDIO_ENABLE
-                if (play_sound) { PLAY_SONG(plover_gb_song); }
-#endif
-                /* layer_off(_ADJUST); */
-            }
-#ifdef AUDIO_ENABLE
-            play_sound = true;
-#endif
-            break;
-        }
-        case 1:
-            if (active) {
-                muse_mode = true;
-            } else {
-                muse_mode = false;
-            }
-    }
-    return true;
 }
 
 void matrix_scan_user(void) {
