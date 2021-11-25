@@ -321,12 +321,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                APPS,   APPS,   APPS,          KC_NO,  KC_NO,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
-
-[_MACRO_R2] = LAYOUT_planck_grid(
-    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,         KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,    KC_NO,          M_NA,           KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          M_NVS,     KC_NO,          KC_NO,          
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          M_LARW,     KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
+[_MACRO_R2] = LAYOUT_matt(
+  //,---------------------------------------.                       ,---------------------------------------
+       RESET,  KC_NO,  KC_NO, KC_NO,   KC_NO,                          KC_NO,  KC_NO,  KC_NO, KC_NO,   KC_NO,          
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,   M_NA,  KC_NO,  KC_NO,  KC_NO,          
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  M_NVS,  KC_NO,  KC_NO,          
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
+                              KC_NO, KC_NO,  KC_NO,          M_LARW,  KC_NO,  KC_NO
+ //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 
 [_MACRO_L2] = LAYOUT_planck_grid(
