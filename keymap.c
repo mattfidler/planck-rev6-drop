@@ -125,17 +125,31 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 };
 
 
-#define LT_SPACE  LT(_MOVE,      KC_SPACE)
+#define LT_SPC  LT(_MOVE,      KC_SPACE)
 #define LT_TAB    LT(_MOUSE,     KC_TAB)
-#define LT_ESCAPE LT(_MEDIA,     KC_ESCAPE)
-#define LT_BSPACE LT(_NUM,       KC_BSPACE)
-#define LT_ENTER  LT(_SYM,       KC_ENTER)
-#define LT_DELETE LT(_FN,        KC_DELETE)
+#define LT_ESC LT(_MEDIA,     KC_ESCAPE)
+#define LT_BSP LT(_NUM,       KC_BSPACE)
+#define LT_RET  LT(_SYM,       KC_ENTER)
+#define LT_DEL LT(_FN,        KC_DELETE)
 #define LT_F      LT(_MACRO_R2,  KC_F)
 #define LT_P      LT(_MACRO_R1,  KC_P)
 #define LT_L      LT(_MACRO_L1,  KC_L)
 #define LT_U      LT(_MACRO_L2,  KC_U)
 #define LT_M      LT(_CA_NUM_L,  KC_M)
+
+#define Q_A  LGUI_T(KC_A)
+#define Q_R LALT_T(KC_R)
+#define Q_S LCTL_T(KC_S)
+#define Q_T LSFT_T(KC_T)
+#define Q_N RSFT_T(KC_N)
+#define Q_E RCTL_T(KC_E)
+#define Q_I RALT_T(KC_I)
+#define Q_O RGUI_T(KC_O)
+#define Q_QUO KC_QUOTE
+#define Q_X RALT_T(KC_X)
+#define Q_CMA KC_COMMA
+#define Q_DOT LALT_T(KC_DOT)
+#define Q_SLASH KC_SLASH
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -150,14 +164,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |   |   | Del | Bspc |Enter |    Reset    | Tab | Spc | Esc |     |   |
  * `---------------------------------------------------------------------'
  */
-[_COLEMAK] = LAYOUT_planck_grid(
-    TD(D_Q),        KC_W,           LT_F,           LT_P,           KC_G,  KC_NO, KC_NO,   TD(D_J),     LT_L,       LT_U,           KC_Y,           KC_QUOTE,
-    LGUI_T(KC_A),   LALT_T(KC_R),   LCTL_T(KC_S),   LSFT_T(KC_T),   KC_D,  KC_NO, KC_NO,   KC_H,    RSFT_T(KC_N),   RCTL_T(KC_E),   RALT_T(KC_I),   RGUI_T(KC_O),
-    KC_Z,           RALT_T(KC_X),   KC_C,           TD(D_V),        KC_B,  KC_NO, KC_NO,  TD(D_K),  LT_M,           KC_COMMA,       LALT_T(KC_DOT), KC_SLASH,
-    KC_NO,          KC_NO,          LT_DELETE,      LT_BSPACE,    LT_ENTER,KC_NO, KC_NO,  LT_TAB,   LT_SPACE,       LT_ESCAPE,      KC_NO,          KC_NO
+[_COLEMAK] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------.
+    TD(D_Q),   KC_W,   LT_F,   LT_P,   KC_G,                        TD(D_J),   LT_L,   LT_U,   KC_Y,  Q_QUO,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+        Q_A,    Q_R,    Q_S,    Q_T,   KC_D,                           KC_H,    Q_N,    Q_E,    Q_I,    Q_O,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       KC_Z,    Q_X,   KC_C,TD(D_V),   KC_B,                        TD(D_K),   LT_M,  Q_CMA,  Q_DOT,Q_SLASH,
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                             LT_DEL, LT_BSP, LT_RET,         LT_TAB, LT_SPC, LT_ESC
+ //                        |-------+-------+-------|       |-------+-------+-------|
 ),
-
-
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
@@ -173,7 +190,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     TD(D_Q),        KC_W,           KC_E,           KC_R,           KC_T,  KC_NO, KC_NO,   KC_Y,    KC_U,           KC_I,           KC_O,           KC_P,
     LGUI_T(KC_A),   LALT_T(KC_S),   LCTL_T(KC_D),   LSFT_T(KC_F),   KC_G,  KC_NO, KC_NO,   KC_H,    RSFT_T(KC_J),   RCTL_T(KC_K),   RALT_T(KC_L),   RGUI_T(KC_QUOTE),
     KC_Z,           RALT_T(KC_X),   KC_C,           TD(D_V),        KC_B,  KC_NO, KC_NO,   KC_N,    LT_M,           KC_COMMA,       LALT_T(KC_DOT), KC_SLASH,
-    KC_NO,          KC_NO,          LT_DELETE,      LT_BSPACE,    LT_ENTER,KC_NO, KC_NO,  LT_TAB,   LT_SPACE,       LT_ESCAPE,      KC_NO,          KC_NO
+    KC_NO,          KC_NO,          LT_DEL,      LT_BSP,    LT_RET,KC_NO, KC_NO,  LT_TAB,   LT_SPC,       LT_ESC,      KC_NO,          KC_NO
 ),
 
 /* Dvorak
@@ -191,7 +208,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_QUOTE,     KC_COMMA,    KC_DOT,       KC_P,         KC_Y,     KC_NO,   KC_NO,   KC_F,         KC_G,          KC_C,         KC_R,   KC_L,
     LGUI_T(KC_A), LALT(KC_O),  LCTL_T(KC_E), LSFT_T(KC_U), KC_I,     KC_NO,   KC_NO,   KC_D,  RSFT_T(KC_H),  RCTL_T(KC_T), RALT_T(KC_N),  RGUI_T(KC_S),
     KC_SLASH,     KC_Q,        KC_J,         KC_K,         KC_X,     KC_NO,   KC_NO,   KC_B,         KC_M,          KC_W,         KC_V,   KC_Z,
-    KC_NO,        KC_NO,       LT_DELETE,    LT_BSPACE,   LT_ENTER, KC_NO,   KC_NO,  LT_TAB,         LT_SPACE,      LT_ESCAPE,    KC_NO,  KC_NO
+    KC_NO,        KC_NO,       LT_DEL,    LT_BSP,   LT_RET, KC_NO,   KC_NO,  LT_TAB,         LT_SPC,      LT_ESC,    KC_NO,  KC_NO
 ),
 /* Mouse
  * ,------------------------------------------------------------------------------.
@@ -837,7 +854,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     }
     return true;
-  case LT_SPACE:
+  case LT_SPC:
     if (inColemak && record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RSHIFT)) {
 	// n 
