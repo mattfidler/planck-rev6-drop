@@ -794,6 +794,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
+#ifdef USE_MUSE
 bool muse_mode = false;
 uint8_t last_muse_note = 0;
 uint16_t muse_counter = 0;
@@ -849,7 +850,7 @@ bool music_mask_user(uint16_t keycode) {
     return true;
   }
 }
-
+#endif 
 
 
 /* Return an integer that corresponds to what kind of tap dance should be executed.
