@@ -61,8 +61,6 @@ enum planck_keycodes {
   M_ASGN,
 };
 
-
-
 enum tap_dance_codes {
   D_Q,
   D_V,
@@ -145,6 +143,33 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define Q_SLASH KC_SLASH
 
 
+#define MW_UP   KC_MS_WH_UP
+#define MW_DOWN KC_MS_WH_DOWN
+#define MW_LEFT KC_MS_WH_LEFT
+#define MW_RGHT KC_MS_WH_LEFT
+
+#define MS_UP KC_MS_UP
+#define MS_DOWN KC_MS_LEFT
+#define MS_LEFT KC_MS_LEFT
+#define MS_RGHT KC_MS_RIGHT
+#define MS_1 KC_MS_BTN1
+#define MS_2 KC_MS_BTN2
+#define MS_3 KC_MS_BTN3
+
+#define QLSHIFT KC_LSHIFT
+#define QLCTRL KC_LCTRL
+#define QLALT  KC_LALT
+#define QLGUI KC_LGUI
+#define QRALT KC_RALT
+
+#define UNDO KC_PC_UNDO
+#define CUT  KC_PC_CUT
+#define COPY  KC_PC_COPY
+#define PASTE  KC_PC_PASTE
+#define REDO LCTL(KC_Y)
+
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_COLEMAK] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
@@ -157,23 +182,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              LT_DEL, LT_BSP, LT_RET,         LT_TAB, LT_SPC, LT_ESC
  //                        |-------+-------+-------|       |-------+-------+-------|
 ),
-/* Mouse
- * ,------------------------------------------------------------------------------.
- * | WhUp  | <-Wh |  ^   | Wh->  |       |   |   |   |       |      |     | Reset |
- * |-------+------+------+-------+-------+---+---+---+-------+------+-----+-------|
- * | WhDwn |  <-  |  v   |   ->  |       |   |   |   | Shift | Ctrl | Alt | Gui   |
- * |-------+------+------+-------+-------+---+---+---+-------+------+-----+-------|
- * | Undo  | Cut  | Copy | Paste | Redo  |   |   |   |       |      |     | End   | 
- * |----- -+------+------+-------+-------+---+---+---+-------+------+-----+-------|
- * |       |      |  Del |  Bksp | Enter |       |   |XXXXXXX|      |     |       |
- * `------------------------------------------------------------------------------'
- */
-
-[_MOUSE] = LAYOUT_planck_grid(
-    KC_MS_WH_UP,    KC_MS_WH_LEFT,  KC_MS_UP,       KC_MS_WH_RIGHT, KC_NO,          KC_NO, KC_NO, KC_NO,         KC_NO,         KC_NO,        KC_NO,    RESET,
-    KC_MS_WH_DOWN,  KC_MS_LEFT,     KC_MS_DOWN,     KC_MS_RIGHT,    KC_NO,          KC_NO, KC_NO, KC_NO, KC_LSHIFT,  KC_LCTRL, KC_LALT, KC_LGUI,        
-    KC_PC_UNDO,     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    LCTL(KC_Y),     KC_NO, KC_NO, KC_NO, KMOUSE,     KC_NO,    KC_RALT, KC_NO,          
-    KC_NO,          KC_NO,          KC_MS_BTN3,     KC_MS_BTN2,     KC_MS_BTN1,     KC_NO, KC_NO, KC_NO, KC_NO,      KC_NO,    KC_NO,   KC_NO
+[_MOUSE] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------.
+      MW_UP,MW_LEFT,  MS_UP,MW_RGHT,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+    MW_DOWN,MS_LEFT,MS_DOWN,MS_RGHT,  KC_NO,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       UNDO,    CUT,   COPY,  PASTE,   REDO,                         KC_NO,  KMOUSE,  KC_NO,  QRALT,  KC_NO,
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                               MS_3,   MS_2,   MS_1,          KC_NO,  KC_NO,  KC_NO
+ //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 
 /* Move
