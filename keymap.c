@@ -181,6 +181,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define PLAY KC_MEDIA_PLAY_PAUSE
 #define STOP KC_MEDIA_STOP
 
+#define LBRACKET KC_LBRACKET
+#define RBRACKET KC_RBRACKET
+
+
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_COLEMAK] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
@@ -227,22 +232,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                MUTE,   PLAY,   STOP,          KC_NO,  KC_NO,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
-/* Number Layer
- * ,------------------------------------------------------------.
- * | Reset |     |       |      |   |   |   | [ | 7 | 8 | 9 | ] |
- * |-------+-----+-------+------+---+---+---+---+---+---+---+---|
- * |  Gui  | Alt |  Ctrl | Shift|   |   |   | = | 4 | 5 | 6 | ; |
- * |-------+-----+-------+------+---+---+---+---+---+---+---+---|
- * |       |     |       |      |   |   |   | \ | 1 | 2 | 3 | ` |
- * |-------+-----+-------+------+---+---+---+---+---+---+---+---|
- * |       |     |       |XXXXXX|   |       | - | 0 | . |   |   |
- * `------------------------------------------------------------'
- */
-[_NUM] = LAYOUT_planck_grid(
-    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,         KC_NO, KC_NO, KC_LBRACKET,    KC_7,           KC_8,           KC_9,           KC_RBRACKET,    
-    KC_LGUI,        KC_LALT,        KC_LCTRL,       KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, KC_EQUAL,       KC_4,           KC_5,           KC_6,           KC_SCOLON,      
-    KC_NO,          KC_RALT,        KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_BSLASH,      KC_1,           KC_2,           KC_3,           KC_GRAVE,       
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_MINUS,       KC_0,           KC_DOT,         KC_NO,          KC_NO
+[_NUM] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------
+    RESET,    KC_NO,  KC_NO,  KC_NO,  KC_NO,                       LBRACKET,   KC_7,   KC_8,   KC_9, RBRACKET,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                       KC_EQUAL,   KC_4,   KC_5,   KC_6, KC_SCOLON,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                      KC_BSLASH,   KC_1,   KC_2,   KC_3, KC_GRAVE,
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                              KC_NO,  KC_NO, KC_NO,        KC_MINUS,   KC_0, KC_DOT
+ //                        |-------+-------+-------|       |-------+-------+-------|
 ),
 /* Symbol Layer
  * ,------------------------------------------------------------.
