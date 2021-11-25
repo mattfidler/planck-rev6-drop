@@ -69,20 +69,20 @@ enum tap_dance_codes {
 };
 
 typedef enum {
-    TD_NONE,
-    TD_UNKNOWN,
-    TD_SINGLE_TAP,
-    TD_SINGLE_HOLD,
-    TD_DOUBLE_TAP,
-    TD_DOUBLE_HOLD,
-    TD_DOUBLE_SINGLE_TAP, // Send two single taps
-    TD_TRIPLE_TAP,
-    TD_TRIPLE_HOLD
+  TD_NONE,
+  TD_UNKNOWN,
+  TD_SINGLE_TAP,
+  TD_SINGLE_HOLD,
+  TD_DOUBLE_TAP,
+  TD_DOUBLE_HOLD,
+  TD_DOUBLE_SINGLE_TAP, // Send two single taps
+  TD_TRIPLE_TAP,
+  TD_TRIPLE_HOLD
 } td_state_t;
 
 typedef struct {
-    bool is_press_action;
-    td_state_t state;
+  bool is_press_action;
+  td_state_t state;
 } td_tap_t;
 
 
@@ -221,146 +221,151 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define ACTL_0 LALT(LCTL(KC_0))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-[_COLEMAK] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------.
-    TD(D_Q),   KC_W,   LT_F,   LT_P,   KC_G,                        TD(D_J),   LT_L,   LT_U,   KC_Y,  Q_QUO,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-        Q_A,    Q_R,    Q_S,    Q_T,   KC_D,                           KC_H,    Q_N,    Q_E,    Q_I,    Q_O,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_Z,    Q_X,   KC_C,TD(D_V),   KC_B,                        TD(D_K),   LT_M,  Q_CMA,  Q_DOT,Q_SLASH,
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                             LT_DEL, LT_BSP, LT_RET,         LT_TAB, LT_SPC, LT_ESC
- //                        |-------+-------+-------|       |-------+-------+-------|
-),
-[_MOUSE] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------.
-      MW_UP,MW_LEFT,  MS_UP,MW_RGHT,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-    MW_DOWN,MS_LEFT,MS_DOWN,MS_RGHT,  KC_NO,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       UNDO,    CUT,   COPY,  PASTE,   REDO,                         KC_NO,  KMOUSE,  KC_NO,  QRALT,  KC_NO,
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                               MS_3,   MS_2,   MS_1,          KC_NO,  KC_NO,  KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
-[_MOVE] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------.
-    KC_PGUP,KC_HOME,  KC_UP, KC_END,  Q_INS,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-    PG_DOWN,KC_LEFT,KC_DOWN,Q_RIGHT, Q_CAPS,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,        
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       UNDO,    CUT,   COPY,  PASTE,   REDO,                          KC_NO,  KMOVE,  KC_NO,  QRALT,  KC_NO,
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                       KC_DELETE,  KC_BSPACE, KC_ENTER,       KC_NO, KC_NO, KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
+  [_COLEMAK] = LAYOUT_matt(
+                           //,---------------------------------------.                       ,---------------------------------------.
+                           TD(D_Q),   KC_W,   LT_F,   LT_P,   KC_G,                        TD(D_J),   LT_L,   LT_U,   KC_Y,  Q_QUO,
+                           //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                           Q_A,    Q_R,    Q_S,    Q_T,   KC_D,                           KC_H,    Q_N,    Q_E,    Q_I,    Q_O,
+                           //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                           KC_Z,    Q_X,   KC_C,TD(D_V),   KC_B,                        TD(D_K),   LT_M,  Q_CMA,  Q_DOT,Q_SLASH,
+                           //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                           LT_DEL, LT_BSP, LT_RET,         LT_TAB, LT_SPC, LT_ESC
+                           //                        |-------+-------+-------|       |-------+-------+-------|
+                           ),
+  [_MOUSE] = LAYOUT_matt(
+                         //,---------------------------------------.                       ,---------------------------------------.
+                         MW_UP,MW_LEFT,  MS_UP,MW_RGHT,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
+                         //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                         MW_DOWN,MS_LEFT,MS_DOWN,MS_RGHT,  KC_NO,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,
+                         //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                         UNDO,    CUT,   COPY,  PASTE,   REDO,                         KC_NO,  KMOUSE,  KC_NO,  QRALT,  KC_NO,
+                         //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                         MS_3,   MS_2,   MS_1,          KC_NO,  KC_NO,  KC_NO
+                         //                        |-------+-------+-------|       |-------+-------+-------|
+                         ),
+  [_MOVE] = LAYOUT_matt(
+                        //,---------------------------------------.                       ,---------------------------------------.
+                        KC_PGUP,KC_HOME,  KC_UP, KC_END,  Q_INS,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
+                        //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                        PG_DOWN,KC_LEFT,KC_DOWN,Q_RIGHT, Q_CAPS,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,        
+                        //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                        UNDO,    CUT,   COPY,  PASTE,   REDO,                          KC_NO,  KMOVE,  KC_NO,  QRALT,  KC_NO,
+                        //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                        KC_DELETE,  KC_BSPACE, KC_ENTER,       KC_NO, KC_NO, KC_NO
+                        //                        |-------+-------+-------|       |-------+-------+-------|
 
-),
-[_MEDIA] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------.
-    RGB_VAI,RGB_SPD, VOL_UP,RGB_SPI,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-    RGB_VAD,   PREV,VOL_DOWN,  NEXT,  KC_NO,                          KC_NO,QLSHIFT, QLCTRL, QLALT,   QLGUI,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-    RGB_TOG,RGB_MOD,RGB_HUD,RGB_HUI,RGB_MOD,                          KC_NO,  KC_NO,  KC_NO,  QRALT,  KC_NO,          
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                               MUTE,   PLAY,   STOP,          KC_NO,  KC_NO,  KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
-[_NUM] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------
-    RESET,    KC_NO,  KC_NO,  KC_NO,  KC_NO,                       LBRACKET,   KC_7,   KC_8,   KC_9, RBRACKET,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                       KC_EQUAL,   KC_4,   KC_5,   KC_6, KC_SCOLON,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                      KC_BSLASH,   KC_1,   KC_2,   KC_3, KC_GRAVE,
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,  KC_NO, KC_NO,        KC_MINUS,   KC_0, KC_DOT
- //                        |-------+-------+-------|       |-------+-------+-------|
-),
-[_SYM] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------
-      RESET, KC_NO,   KC_NO,  KC_NO,  KC_NO,                        KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,        
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                        KC_PLUS, KC_DLR,KC_PERC,KC_CIRC,KC_COLN,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                        KC_PIPE,KC_EXLM,  KC_AT,KC_HASH,KC_TILD,        
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,  KC_NO,  KC_NO,        KC_UNDS,KC_LPRN,KC_RPRN
- //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
-[_FN] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------
-       RESET,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_PSCREEN,  KC_F7,  KC_F8,  KC_F9, KC_F12,         
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                  KC_SCROLLLOCK,  KC_F4,  KC_F5,  KC_F6, KC_F11,         
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                       KC_PAUSE,  KC_F1,  KC_F2,  KC_F3, KC_F10,         
-  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
-  //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
-[_CA_NUM_R] = LAYOUT_matt(
-  //,---------------------------------------.                       ,---------------------------------------
-       RESET,  KC_NO, KC_NO,   KC_NO,  KC_NO,                          CTL_6,  CTL_7,  CTL_8,  CTL_9,  CTL_0,
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,     
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         ACTL_6, ACTL_7, ACTL_8, ACTL_9, ACTL_0,           
-  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
-  //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
-[_CA_NUM_L] = LAYOUT_matt(
-  //,---------------------------------------.                       ,---------------------------------------
-       CTL_1,  CTL_2,  CTL_3,  CTL_4,  CTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,        
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      ACTL_1, ACTL_2, ACTL_3, ACTL_4, ACTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
-                               APPS,   APPS,   APPS,          KC_NO,  KC_NO,  KC_NO
-  //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
-[_MACRO_R2] = LAYOUT_matt(
-  //,---------------------------------------.                       ,---------------------------------------
-       RESET,  KC_NO,  KC_NO, KC_NO,   KC_NO,                          KC_NO,  KC_NO,  KC_NO, KC_NO,   KC_NO,          
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,   M_NA,  KC_NO,  KC_NO,  KC_NO,          
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  M_NVS,  KC_NO,  KC_NO,          
-  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
-                              KC_NO, KC_NO,  KC_NO,          M_LARW,  KC_NO,  KC_NO
-  //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
+                        ),
+  [_MEDIA] = LAYOUT_matt(
+                         //,---------------------------------------.                       ,---------------------------------------.
+                         RGB_VAI,RGB_SPD, VOL_UP,RGB_SPI,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
+                         //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                         RGB_VAD,   PREV,VOL_DOWN,  NEXT,  KC_NO,                          KC_NO,QLSHIFT, QLCTRL, QLALT,   QLGUI,
+                         //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                         RGB_TOG,RGB_MOD,RGB_HUD,RGB_HUI,RGB_MOD,                          KC_NO,  KC_NO,  KC_NO,  QRALT,  KC_NO,          
+                         //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                         MUTE,   PLAY,   STOP,          KC_NO,  KC_NO,  KC_NO
+                         //                        |-------+-------+-------|       |-------+-------+-------|
+                         ),
+  [_NUM] = LAYOUT_matt(
+                       //,---------------------------------------.                       ,---------------------------------------
+                       RESET,    KC_NO,  KC_NO,  KC_NO,  KC_NO,                       LBRACKET,   KC_7,   KC_8,   KC_9, RBRACKET,
+                       //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                       QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                       KC_EQUAL,   KC_4,   KC_5,   KC_6, KC_SCOLON,
+                       //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                       KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                      KC_BSLASH,   KC_1,   KC_2,   KC_3, KC_GRAVE,
+                       //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                       KC_NO,  KC_NO, KC_NO,        KC_MINUS,   KC_0, KC_DOT
+                       //                        |-------+-------+-------|       |-------+-------+-------|
+                       ),
+  [_SYM] = LAYOUT_matt(
+                       //,---------------------------------------.                       ,---------------------------------------
+                       RESET, KC_NO,   KC_NO,  KC_NO,  KC_NO,                        KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,        
+                       //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                       QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                        KC_PLUS, KC_DLR,KC_PERC,KC_CIRC,KC_COLN,
+                       //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                       KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                        KC_PIPE,KC_EXLM,  KC_AT,KC_HASH,KC_TILD,        
+                       //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                       KC_NO,  KC_NO,  KC_NO,        KC_UNDS,KC_LPRN,KC_RPRN
+                       //                        |-------+-------+-------|       |-------+-------+-------|
+                       ),
+  [_FN] = LAYOUT_matt(
+                      //,---------------------------------------.                       ,---------------------------------------
+                      RESET,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_PSCREEN,  KC_F7,  KC_F8,  KC_F9, KC_F12,         
+                      //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                      QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                  KC_SCROLLLOCK,  KC_F4,  KC_F5,  KC_F6, KC_F11,         
+                      //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                       KC_PAUSE,  KC_F1,  KC_F2,  KC_F3, KC_F10,         
+                      //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                      KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
+                      //                        |-------+-------+-------|       |-------+-------+-------|
+                      ),
+  [_CA_NUM_R] = LAYOUT_matt(
+                            //,---------------------------------------.                       ,---------------------------------------
+                            RESET,  KC_NO, KC_NO,   KC_NO,  KC_NO,                          CTL_6,  CTL_7,  CTL_8,  CTL_9,  CTL_0,
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,     
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         ACTL_6, ACTL_7, ACTL_8, ACTL_9, ACTL_0,           
+                            //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
+                            //                        |-------+-------+-------|       |-------+-------+-------|
+                            ),
+  [_CA_NUM_L] = LAYOUT_matt(
+                            //,---------------------------------------.                       ,---------------------------------------
+                            CTL_1,  CTL_2,  CTL_3,  CTL_4,  CTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,        
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            ACTL_1, ACTL_2, ACTL_3, ACTL_4, ACTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+                            //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
+                            APPS,   APPS,   APPS,          KC_NO,  KC_NO,  KC_NO
+                            //                        |-------+-------+-------|       |-------+-------+-------|
+                            ),
+  [_MACRO_R2] = LAYOUT_matt(
+                            //,---------------------------------------.                       ,---------------------------------------
+                            RESET,  KC_NO,  KC_NO, KC_NO,   KC_NO,                          KC_NO,  KC_NO,  KC_NO, KC_NO,   KC_NO,          
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,   M_NA,  KC_NO,  KC_NO,  KC_NO,          
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  M_NVS,  KC_NO,  KC_NO,          
+                            //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+--------|
+                            KC_NO, KC_NO,  KC_NO,          M_LARW,  KC_NO,  KC_NO
+                            //                        |-------+-------+-------|       |-------+-------+-------|
+                            ),
 
-[_MACRO_L2] = LAYOUT_matt(
-  //,---------------------------------------.                       ,---------------------------------------
-       KC_NO,  KC_NO,  KC_NO, M_PRO,   KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_NO, M_REAL,  M_SXP,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
-  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                               KC_NO,  KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
-  //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
-[_MACRO_L1] = LAYOUT_matt(
-  //,---------------------------------------.                       ,---------------------------------------
-       KC_NO,  M_WPM,M_FALSE,  M_PMX,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       M_AIC,M_RxODE, M_SEXP, M_TRUE,M_DRAFT,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_NO,  KC_NO, M_CRAN,  KC_NO,  M_BIC,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
-  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,   KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
-  //                        |-------+-------+-------|       |-------+-------+-------|
-  ),
-[_MACRO_R1] = LAYOUT_planck_grid(
-    KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          M_NULL,    KC_NO,          M_INTEGER,    KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          M_GMAIL,    M_PIPE,    KC_NO,          
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_TRANSPARENT, KC_NO,          M_ASGN,    KC_NO,          KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT
-  )
+  [_MACRO_L2] = LAYOUT_matt(
+                            //,---------------------------------------.                       ,---------------------------------------
+                            KC_NO,  KC_NO,  KC_NO, M_PRO,   KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            KC_NO, M_REAL,  M_SXP,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+                            //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
+                            //                        |-------+-------+-------|       |-------+-------+-------|
+                            ),
+  [_MACRO_L1] = LAYOUT_matt(
+                            //,---------------------------------------.                       ,---------------------------------------
+                            KC_NO,  M_WPM,M_FALSE,  M_PMX,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            M_AIC,M_RxODE, M_SEXP, M_TRUE,M_DRAFT,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO, M_CRAN,  KC_NO,  M_BIC,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+                            //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                            KC_NO,   KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
+                            //                        |-------+-------+-------|       |-------+-------+-------|
+                            ),
+  [_MACRO_R1] = LAYOUT_matt(
+                            //,---------------------------------------.                       ,---------------------------------------
+                            KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO, M_NULL,  KC_NO,M_INTEGER,KC_NO,          
+                            //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,M_GMAIL, M_PIPE,  KC_NO,          
+                            //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                            KC_NO,  KC_NO,  KC_NO,         M_ASGN,  KC_NO,  KC_NO
+                            //                        |-------+-------+-------|       |-------+-------+-------|
+                            )
 };
 
 /* layer_state_t layer_state_set_user(layer_state_t state) { */
@@ -542,48 +547,48 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     break;
     
-// http://norvig.com/mayzner.html
-// th = 3.56% (Alternating hand bigram)
-// he = 3.07% (H is not home row)
-// in = 2.43%
-// er = 2.05% Alternating hand // ctrl 
-// an = 1.99% Alternating hand // win n
-// re = 1.85% Alternating hand // alt e
-// on = 1.76%
-// at = 1.49%
-// en = 1.45%
-// nd = 1.35% Alternating hand // D
-// ti = 1.34% Alternating hand // I
-// es = 1.34% Alternating hand // ctrl s
-// or = 1.28% Alternating hand // run command redundant with simple windows key
-// te = 1.20% Alternating hand // E
-// of = 1.17% Alternating hand // win + f
-// ed = 1.17% Alternating hand // ctrl d
-// is = 1.13% Alternating hand // alt s
-// it = 1.12% Alternating hand // alt t
-// al = 1.09% Alternating hand // win l
-// ar = 1.07%
-// st = 1.05%
-// to = 1.04% Alternating hand // O
-// nt = 1.04% Alternating hand // T 
-// ng = 0.95% Alternating hand // G
-// se = 0.93% Alternating hand // ctrl e
-// ha = 0.93% Alternating hand // non home row modifiers
-// as = 0.87%
-// ou = 0.87%
-// io = 0.83%
-// le = 0.83% no home row mods
-// ve = 0.83% no home row mods
-// co = 0.79% alternating hands 
-// me = 0.79% no home row mods 
-// de = 0.76% no howe row mods
-// hi = 0.73% no home row mods
-// ri = 0.73% Alternating hands alt i
-// ro = 0.73% Alternating hands alt o
-// ic = 0.70% Alternating hands alt c
-// ne = 0.69%
+    // http://norvig.com/mayzner.html
+    // th = 3.56% (Alternating hand bigram)
+    // he = 3.07% (H is not home row)
+    // in = 2.43%
+    // er = 2.05% Alternating hand // ctrl 
+    // an = 1.99% Alternating hand // win n
+    // re = 1.85% Alternating hand // alt e
+    // on = 1.76%
+    // at = 1.49%
+    // en = 1.45%
+    // nd = 1.35% Alternating hand // D
+    // ti = 1.34% Alternating hand // I
+    // es = 1.34% Alternating hand // ctrl s
+    // or = 1.28% Alternating hand // run command redundant with simple windows key
+    // te = 1.20% Alternating hand // E
+    // of = 1.17% Alternating hand // win + f
+    // ed = 1.17% Alternating hand // ctrl d
+    // is = 1.13% Alternating hand // alt s
+    // it = 1.12% Alternating hand // alt t
+    // al = 1.09% Alternating hand // win l
+    // ar = 1.07%
+    // st = 1.05%
+    // to = 1.04% Alternating hand // O
+    // nt = 1.04% Alternating hand // T 
+    // ng = 0.95% Alternating hand // G
+    // se = 0.93% Alternating hand // ctrl e
+    // ha = 0.93% Alternating hand // non home row modifiers
+    // as = 0.87%
+    // ou = 0.87%
+    // io = 0.83%
+    // le = 0.83% no home row mods
+    // ve = 0.83% no home row mods
+    // co = 0.79% alternating hands 
+    // me = 0.79% no home row mods 
+    // de = 0.76% no howe row mods
+    // hi = 0.73% no home row mods
+    // ri = 0.73% Alternating hands alt i
+    // ro = 0.73% Alternating hands alt o
+    // ic = 0.70% Alternating hands alt c
+    // ne = 0.69%
 
-// Bigrams that do not exist jq, qg, qy, qz, wq, and qz
+    // Bigrams that do not exist jq, qg, qy, qz, wq, and qz
 
 
     // common bigraphs that contain home row mods on same hand
@@ -591,19 +596,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case HM_R:
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
-	// or = 1.28% Alternating hand // run command redundant with simple windows key
-	unregister_mods(MOD_BIT(KC_RGUI));
-	tap_code(KC_O);
-	tap_code(KC_R);
-	add_mods(MOD_BIT(KC_RGUI));
-	return false;
+        // or = 1.28% Alternating hand // run command redundant with simple windows key
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_R);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
       } else if (get_mods() & MOD_BIT(KC_LGUI)) {
-	// ar 1.07% 
-	unregister_mods(MOD_BIT(KC_LGUI));
-	tap_code(KC_A);
-	tap_code(KC_R);
-	add_mods(MOD_BIT(KC_LGUI));
-	return false;
+        // ar 1.07% 
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_R);
+        add_mods(MOD_BIT(KC_LGUI));
+        return false;
       }
     }
     return true;
@@ -611,11 +616,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //// of = 1.17% Alternating hand // win + f
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
-	unregister_mods(MOD_BIT(KC_RGUI));
-	tap_code(KC_O);
-	tap_code(KC_F);
-	add_mods(MOD_BIT(KC_RGUI));
-	return false;
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_F);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
       }
     }
     return true;
@@ -623,11 +628,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     //al = 1.09% Alternating hand
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_LGUI)) {
-	unregister_mods(MOD_BIT(KC_LGUI));
-	tap_code(KC_A);
-	tap_code(KC_L);
-	add_mods(MOD_BIT(KC_LGUI));
-	return false;
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_L);
+        add_mods(MOD_BIT(KC_LGUI));
+        return false;
       }
     }
     return true;
@@ -635,18 +640,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // om bigraph
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
-	unregister_mods(MOD_BIT(KC_RGUI));
-	tap_code(KC_O);
-	tap_code(KC_M);
-	add_mods(MOD_BIT(KC_RGUI));
-	return false;
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_M);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
       } else if (get_mods() & MOD_BIT(KC_RCTL)) {
-	// em bigraph
-	unregister_mods(MOD_BIT(KC_RCTL));
-	tap_code(KC_E);
-	tap_code(KC_M);
-	add_mods(MOD_BIT(KC_RCTL));
-	return false;
+        // em bigraph
+        unregister_mods(MOD_BIT(KC_RCTL));
+        tap_code(KC_E);
+        tap_code(KC_M);
+        add_mods(MOD_BIT(KC_RCTL));
+        return false;
       }
     }
     return true;
@@ -654,12 +659,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // handle ou case and send ou for gui right+u
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RGUI)) {
-	// ou = 0.87%
-	unregister_mods(MOD_BIT(KC_RGUI));
-	tap_code(KC_O);
-	tap_code(KC_U);
-	add_mods(MOD_BIT(KC_RGUI));
-	return false;
+        // ou = 0.87%
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_U);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
       }
     }
     return true; 
@@ -667,19 +672,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // handles st
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_LGUI)) {
-	// handle at 1.49%
-	unregister_mods(MOD_BIT(KC_LGUI));
-	tap_code(KC_A);
-	tap_code(KC_T);
-	unregister_mods(MOD_BIT(KC_LGUI));
-	return false;
+        // handle at 1.49%
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_T);
+        unregister_mods(MOD_BIT(KC_LGUI));
+        return false;
       } else if (get_mods() & MOD_BIT(KC_LCTL)) {
-	// handle st 1.05%
-	unregister_mods(MOD_BIT(KC_LCTL));
-	tap_code(KC_S);
-	tap_code(KC_T);
-	add_mods(MOD_BIT(KC_LCTL));
-	return false;
+        // handle st 1.05%
+        unregister_mods(MOD_BIT(KC_LCTL));
+        tap_code(KC_S);
+        tap_code(KC_T);
+        add_mods(MOD_BIT(KC_LCTL));
+        return false;
       }
     }
     return true; 
@@ -688,100 +693,100 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->tap.count > 0) {
       uint8_t current_mods = get_mods();
       if (current_mods & MOD_BIT(KC_RALT)) {
-	// in 2.43%
-	unregister_mods(MOD_BIT(KC_RALT));
-	tap_code(KC_I);
-	tap_code(KC_N);
-	add_mods(MOD_BIT(KC_RALT));
-	return false;
+        // in 2.43%
+        unregister_mods(MOD_BIT(KC_RALT));
+        tap_code(KC_I);
+        tap_code(KC_N);
+        add_mods(MOD_BIT(KC_RALT));
+        return false;
       } else if (current_mods & MOD_BIT(KC_LGUI))  {
-	//an = 1.99% Alternating hand
-	unregister_mods(MOD_BIT(KC_LGUI));
-	tap_code(KC_A);
-	tap_code(KC_N);
-	add_mods(MOD_BIT(KC_LGUI));
-	return false;
+        //an = 1.99% Alternating hand
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_N);
+        add_mods(MOD_BIT(KC_LGUI));
+        return false;
       } else if (current_mods & MOD_BIT(KC_RGUI)) {
-	// on 1.76%
-	unregister_mods(MOD_BIT(KC_RGUI));
-	tap_code(KC_O);
-	tap_code(KC_N);
-	add_mods(MOD_BIT(KC_RGUI));
-	return false;
+        // on 1.76%
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_N);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
       } else if (current_mods & MOD_BIT(KC_RCTL)) {
-	// en 1.45%
-	unregister_mods(MOD_BIT(KC_RCTL));
-	tap_code(KC_E);
-	tap_code(KC_N);
-	add_mods(MOD_BIT(KC_RCTL));
-	return false;
+        // en 1.45%
+        unregister_mods(MOD_BIT(KC_RCTL));
+        tap_code(KC_E);
+        tap_code(KC_N);
+        add_mods(MOD_BIT(KC_RCTL));
+        return false;
       }
     }
     return true;
   case HM_S:
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_LGUI)) {
-	// as 0.87%
-	unregister_mods(MOD_BIT(KC_LGUI));
-	tap_code(KC_A);
-	tap_code(KC_S);
-	add_mods(MOD_BIT(KC_LGUI));
-	return false;
+        // as 0.87%
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_S);
+        add_mods(MOD_BIT(KC_LGUI));
+        return false;
       }
       return true;
     }
   case HM_O:
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RALT)) {
-	// handle io 0.83%
-	unregister_mods(MOD_BIT(KC_RALT));
-	tap_code(KC_I);
-	tap_code(KC_O);
-	add_mods(MOD_BIT(KC_RALT));
-	return false;
+        // handle io 0.83%
+        unregister_mods(MOD_BIT(KC_RALT));
+        tap_code(KC_I);
+        tap_code(KC_O);
+        add_mods(MOD_BIT(KC_RALT));
+        return false;
       }
     }
     return true;
   case HM_E:
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RSHIFT)) {
-	// ne
-	unregister_mods(MOD_BIT(KC_RSHIFT));
-	tap_code(KC_N);
-	tap_code(KC_E);
-	add_mods(MOD_BIT(KC_RSHIFT));
-	return false;
+        // ne
+        unregister_mods(MOD_BIT(KC_RSHIFT));
+        tap_code(KC_N);
+        tap_code(KC_E);
+        add_mods(MOD_BIT(KC_RSHIFT));
+        return false;
       }
     }
     return true;
   case HM_A:
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RALT)) {
-	// ra
-	unregister_mods(MOD_BIT(KC_RALT));
-	tap_code(KC_R);
-	tap_code(KC_A);
-	add_mods(MOD_BIT(KC_RALT));
-	return false;
+        // ra
+        unregister_mods(MOD_BIT(KC_RALT));
+        tap_code(KC_R);
+        tap_code(KC_A);
+        add_mods(MOD_BIT(KC_RALT));
+        return false;
       }
     }
     return true;
   case LT_SPC:
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RSHIFT)) {
-	// n 
-	unregister_mods(MOD_BIT(KC_RSHIFT));
-	tap_code(KC_N);
-	tap_code(KC_SPC);
-	add_mods(MOD_BIT(KC_RSHIFT));
-	return false;
+        // n 
+        unregister_mods(MOD_BIT(KC_RSHIFT));
+        tap_code(KC_N);
+        tap_code(KC_SPC);
+        add_mods(MOD_BIT(KC_RSHIFT));
+        return false;
       } else if (get_mods() & MOD_BIT(KC_LSHIFT)) {
-	// t 
-	unregister_mods(MOD_BIT(KC_LSHIFT));
-	tap_code(KC_T);
-	tap_code(KC_SPC);
-	add_mods(MOD_BIT(KC_LSHIFT));
-	return false;
+        // t 
+        unregister_mods(MOD_BIT(KC_LSHIFT));
+        tap_code(KC_T);
+        tap_code(KC_SPC);
+        add_mods(MOD_BIT(KC_LSHIFT));
+        return false;
       }
     }
   }
@@ -815,22 +820,22 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 
 void matrix_scan_user(void) {
 #ifdef AUDIO_ENABLE
-    if (muse_mode) {
-        if (muse_counter == 0) {
-            uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
-            if (muse_note != last_muse_note) {
-                stop_note(compute_freq_for_midi_note(last_muse_note));
-                play_note(compute_freq_for_midi_note(muse_note), 0xF);
-                last_muse_note = muse_note;
-            }
-        }
-        muse_counter = (muse_counter + 1) % muse_tempo;
-    } else {
-        if (muse_counter) {
-            stop_all_notes();
-            muse_counter = 0;
-        }
+  if (muse_mode) {
+    if (muse_counter == 0) {
+      uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
+      if (muse_note != last_muse_note) {
+        stop_note(compute_freq_for_midi_note(last_muse_note));
+        play_note(compute_freq_for_midi_note(muse_note), 0xF);
+        last_muse_note = muse_note;
+      }
     }
+    muse_counter = (muse_counter + 1) % muse_tempo;
+  } else {
+    if (muse_counter) {
+      stop_all_notes();
+      muse_counter = 0;
+    }
+  }
 #endif
 }
 
@@ -839,8 +844,8 @@ bool music_mask_user(uint16_t keycode) {
     /* case KC_NO: */
     /* case LOWER: */
     /*   return false; */
-    default:
-      return true;
+  default:
+    return true;
   }
 }
 
@@ -874,54 +879,54 @@ bool music_mask_user(uint16_t keycode) {
  *
  */
 td_state_t cur_dance(qk_tap_dance_state_t *state) {
-    if (state->count == 1) {
-        if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
-        // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
-        else return TD_SINGLE_HOLD;
-    } else if (state->count == 2) {
-        // TD_DOUBLE_SINGLE_TAP is to distinguish between typing "pepper", and actually wanting a double tap
-        // action when hitting 'pp'. Suggested use case for this return value is when you want to send two
-        // keystrokes of the key, and not the 'double tap' action/macro.
-        if (state->interrupted) return TD_DOUBLE_SINGLE_TAP;
-        else if (state->pressed) return TD_DOUBLE_HOLD;
-        else return TD_DOUBLE_TAP;
-    }
+  if (state->count == 1) {
+    if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
+    // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
+    else return TD_SINGLE_HOLD;
+  } else if (state->count == 2) {
+    // TD_DOUBLE_SINGLE_TAP is to distinguish between typing "pepper", and actually wanting a double tap
+    // action when hitting 'pp'. Suggested use case for this return value is when you want to send two
+    // keystrokes of the key, and not the 'double tap' action/macro.
+    if (state->interrupted) return TD_DOUBLE_SINGLE_TAP;
+    else if (state->pressed) return TD_DOUBLE_HOLD;
+    else return TD_DOUBLE_TAP;
+  }
 
-    // Assumes no one is trying to type the same letter three times (at least not quickly).
-    // If your tap dance key is 'KC_W', and you want to type "www." quickly - then you will need to add
-    // an exception here to return a 'TD_TRIPLE_SINGLE_TAP', and define that enum just like 'TD_DOUBLE_SINGLE_TAP'
-    if (state->count == 3) {
-        if (state->interrupted || !state->pressed) return TD_TRIPLE_TAP;
-        else return TD_TRIPLE_HOLD;
-    } else return TD_UNKNOWN;
+  // Assumes no one is trying to type the same letter three times (at least not quickly).
+  // If your tap dance key is 'KC_W', and you want to type "www." quickly - then you will need to add
+  // an exception here to return a 'TD_TRIPLE_SINGLE_TAP', and define that enum just like 'TD_DOUBLE_SINGLE_TAP'
+  if (state->count == 3) {
+    if (state->interrupted || !state->pressed) return TD_TRIPLE_TAP;
+    else return TD_TRIPLE_HOLD;
+  } else return TD_UNKNOWN;
 }
 
 // Create an instance of 'td_tap_t' for the 'v' tap dance.
 static td_tap_t vtap_state = {
-    .is_press_action = true,
-    .state = TD_NONE
+  .is_press_action = true,
+  .state = TD_NONE
 };
 
 void v_finished(qk_tap_dance_state_t *state, void *user_data) {
-    vtap_state.state = cur_dance(state);
-    switch (vtap_state.state) {
-    case TD_SINGLE_TAP: register_code(KC_V); break;
-    case TD_SINGLE_HOLD: layer_on(_CA_NUM_R); break;
-    case TD_DOUBLE_TAP: register_code16(LALT(KC_F4)); break;
-    case TD_DOUBLE_HOLD: register_code(KC_V); break;
-    case TD_DOUBLE_SINGLE_TAP: tap_code(KC_V); register_code(KC_V);
-    default: break;
-    }
+  vtap_state.state = cur_dance(state);
+  switch (vtap_state.state) {
+  case TD_SINGLE_TAP: register_code(KC_V); break;
+  case TD_SINGLE_HOLD: layer_on(_CA_NUM_R); break;
+  case TD_DOUBLE_TAP: register_code16(LALT(KC_F4)); break;
+  case TD_DOUBLE_HOLD: register_code(KC_V); break;
+  case TD_DOUBLE_SINGLE_TAP: tap_code(KC_V); register_code(KC_V);
+  default: break;
+  }
 }
 
 void v_reset(qk_tap_dance_state_t *state, void *user_data) {
-    switch (vtap_state.state) {
-    case TD_SINGLE_TAP: unregister_code(KC_V); break;
-    case TD_SINGLE_HOLD: layer_off(_CA_NUM_R); break;
-    case TD_DOUBLE_TAP: unregister_code16(LALT(KC_F4)); break;
-    case TD_DOUBLE_HOLD: unregister_code(KC_V);
-    case TD_DOUBLE_SINGLE_TAP: unregister_code(KC_V);
-    default: break;
-    }
-   vtap_state.state = TD_NONE;
+  switch (vtap_state.state) {
+  case TD_SINGLE_TAP: unregister_code(KC_V); break;
+  case TD_SINGLE_HOLD: layer_off(_CA_NUM_R); break;
+  case TD_DOUBLE_TAP: unregister_code16(LALT(KC_F4)); break;
+  case TD_DOUBLE_HOLD: unregister_code(KC_V);
+  case TD_DOUBLE_SINGLE_TAP: unregister_code(KC_V);
+  default: break;
+  }
+  vtap_state.state = TD_NONE;
 }
