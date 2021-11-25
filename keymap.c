@@ -243,34 +243,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               KC_NO,  KC_NO, KC_NO,        KC_MINUS,   KC_0, KC_DOT
  //                        |-------+-------+-------|       |-------+-------+-------|
 ),
-/* Symbol Layer
- * ,------------------------------------------------------------.
- * | Reset |     |       |      |   |   |   | [ | & | * | ( | } |
- * |-------+-----+-------+------+---+---+---+---+---+---+---+---|
- * |  Gui  | Alt |  Ctrl | Shift|   |   |   | = | $ | % | ^ | : |
- * |-------+-----+-------+------+---+---+---+---+---+---+---+---|
- * |       |     |       |      |   |   |   | \ | ! | @ | # | ~ |
- * |-------+-----+-------+------+---+---+---+---+---+---+---+---|
- * |       |     |       |      |XXX|       | _ | ( | ) |   |   |
- * `------------------------------------------------------------'
- */
-[_SYM] = LAYOUT_planck_grid(
-    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,          KC_NO, KC_NO, KC_LCBR,        KC_AMPR,        KC_ASTR,        KC_LPRN,        KC_RCBR,        
-    KC_LGUI,        KC_LALT,        KC_LCTRL,       KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, KC_PLUS,        KC_DLR,         KC_PERC,        KC_CIRC,        KC_COLN,        
-    KC_NO,          KC_RALT,        KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_PIPE,        KC_EXLM,        KC_AT,          KC_HASH,        KC_TILD,        
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_UNDS,        KC_LPRN,        KC_RPRN,        KC_NO,          KC_NO
+[_SYM] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------
+      RESET, KC_NO,   KC_NO,  KC_NO,  KC_NO,                        KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,        
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                        KC_PLUS, KC_DLR,KC_PERC,KC_CIRC,KC_COLN,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                        KC_PIPE,KC_EXLM,  KC_AT,KC_HASH,KC_TILD,        
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                              KC_NO,  KC_NO,  KC_NO,        KC_UNDS,KC_LPRN,KC_RPRN
+ //                        |-------+-------+-------|       |-------+-------+-------|
   ),
-/* Function Layer
- * ,----------------------------------------------------------------------.
- * | Reset |     |       |      |   |   |   | PrnScn | f7 | f8 | f9 | f12 |
- * |-------+-----+-------+------+---+---+---+--------+----+----+----+-----|
- * |  Gui  | Alt |  Ctrl | Shift|   |   |   | ScrlLck| f4 | f5 | f6 | f11 |
- * |-------+-----+-------+------+---+---+---+--------+----+----+----+-----|
- * |       |     |       |      |   |   |   | Pause  | f1 | f2 | f3 | f10 |
- * |-------+-----+-------+------+---+---+---+--------+----+----+----+-----|
- * |       |     |       |      |XXX|       | Apps   | Apps |Apps|    |     |
- * `----------------------------------------------------------------------'
- */
 [_FN] = LAYOUT_planck_grid(
     RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,    KC_NO, KC_NO, KC_PSCREEN,     KC_F7,          KC_F8,          KC_F9,          KC_F12,         
     KC_LGUI,        KC_LALT,   KC_LCTRL,       KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, KC_SCROLLLOCK,  KC_F4,          KC_F5,          KC_F6,          KC_F11,         
