@@ -1,3 +1,0 @@
-//#define PLANCK
-#define CRKBD
-
