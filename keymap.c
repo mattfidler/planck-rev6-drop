@@ -184,7 +184,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define LBRACKET KC_LBRACKET
 #define RBRACKET KC_RBRACKET
 
-
+#define APPS KC_APPLICATION
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_COLEMAK] = LAYOUT_matt(
@@ -254,11 +254,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               KC_NO,  KC_NO,  KC_NO,        KC_UNDS,KC_LPRN,KC_RPRN
  //                        |-------+-------+-------|       |-------+-------+-------|
   ),
-[_FN] = LAYOUT_planck_grid(
-    RESET,          KC_NO,         KC_NO,        KC_NO,         KC_NO,    KC_NO, KC_NO, KC_PSCREEN,     KC_F7,          KC_F8,          KC_F9,          KC_F12,         
-    KC_LGUI,        KC_LALT,   KC_LCTRL,       KC_LSHIFT,      KC_NO,          KC_NO, KC_NO, KC_SCROLLLOCK,  KC_F4,          KC_F5,          KC_F6,          KC_F11,         
-    KC_NO,          KC_RALT,   KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_PAUSE,       KC_F1,          KC_F2,          KC_F3,          KC_F10,         
-    KC_NO,          KC_NO,     KC_NO,          KC_NO,          KC_NO,          KC_NO, KC_NO, KC_APPLICATION,         KC_APPLICATION, KC_APPLICATION, KC_NO, KC_NO
+[_FN] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------
+       RESET,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_PSCREEN,  KC_F7,  KC_F8,  KC_F9, KC_F12,         
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                  KC_SCROLLLOCK,  KC_F4,  KC_F5,  KC_F6, KC_F11,         
+  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+       KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                       KC_PAUSE,  KC_F1,  KC_F2,  KC_F3, KC_F10,         
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                              KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
+ //                        |-------+-------+-------|       |-------+-------+-------|
   ),
 
 /*  c+a+num
