@@ -15,7 +15,9 @@
  */
 
 #pragma once
+#include "config-user.h"
 
+#ifdef PLANCK
 #ifdef AUDIO_ENABLE
 #    define STARTUP_SONG SONG(PLANCK_SOUND)
 // #define STARTUP_SONG SONG(NO_SOUND)
@@ -48,6 +50,8 @@
 // Most tactile encoders have detents every 4 stages
 #define ENCODER_RESOLUTION 4
 
+#endif
+
 #undef TAPPING_TERM
 #define TAPPING_TERM 180
 #define PERMISSIVE_HOLD
@@ -68,6 +72,7 @@
 #define MOUSEKEY_WHEEL_TIME_TO_MAX  MOUSEKEY_TIME_TO_MAX
 #define TAPPING_TOGGLE  1
 
+#ifdef PLANCK
 #define USE_MUSE
 
 #define LAYOUT_matt( \
@@ -82,3 +87,4 @@ LAYOUT_planck_grid( \
   K20,   K21,   K22, K23, K24,  KC_NO, KC_NO, K25, K26, K27, K28,   K29, \
   KC_NO, KC_NO, K30, K31, K32,  KC_NO, KC_NO, K33, K34, K35, KC_NO, KC_NO \
 )
+#endif
