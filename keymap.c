@@ -30,8 +30,6 @@ enum planck_layers {
   _FN,
   _CA_NUM_R,
   _CA_NUM_L,
-  _MACRO_L2,
-  _MACRO_R2,
   _MACRO_L1,
   _MACRO_R1
 };
@@ -43,9 +41,6 @@ enum planck_keycodes {
   M_NA,
   M_NVS,
   M_LARW,
-  M_PRO,
-  M_REAL,
-  M_SXP,
   M_WPM,
   M_FALSE,
   M_PMX,
@@ -63,36 +58,6 @@ enum planck_keycodes {
   M_ASGN,
 };
 
-enum tap_dance_codes {
-  D_Q,
-  D_V,
-  D_K,
-  D_J,
-};
-
-typedef enum {
-  TD_NONE,
-  TD_UNKNOWN,
-  TD_SINGLE_TAP,
-  TD_SINGLE_HOLD,
-  TD_DOUBLE_TAP,
-  TD_DOUBLE_HOLD,
-  TD_DOUBLE_SINGLE_TAP, // Send two single taps
-  TD_TRIPLE_TAP,
-  TD_TRIPLE_HOLD
-} td_state_t;
-
-typedef struct {
-  bool is_press_action;
-  td_state_t state;
-} td_tap_t;
-
-
-td_state_t cur_dance(qk_tap_dance_state_t *state);
-
-// For the x tap dance. Put it here so it can be used in any keymap
-void v_finished(qk_tap_dance_state_t *state, void *user_data);
-void v_reset(qk_tap_dance_state_t *state, void *user_data);
 
 #define KC_MAC_UNDO LGUI(KC_Z)
 #define KC_MAC_CUT LGUI(KC_X)
@@ -110,25 +75,18 @@ void v_reset(qk_tap_dance_state_t *state, void *user_data);
 #define LSA_T(kc) MT(MOD_LSFT | MOD_LALT, kc)
 #define BP_NDSH_MAC ALGR(KC_8)
 
-qk_tap_dance_action_t tap_dance_actions[] = {
-  [D_Q] = ACTION_TAP_DANCE_DOUBLE(KC_Q, LGUI(KC_L)),
-  [D_V] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, v_finished, v_reset),
-  [D_K] = ACTION_TAP_DANCE_DOUBLE(KC_K, KC_APPLICATION),
-  [D_J] = ACTION_TAP_DANCE_DOUBLE(KC_J, KC_LGUI),
-};
-
-
 #define LT_SPC  LT(_MOVE,      KC_SPACE)
 #define LT_TAB    LT(_MOUSE,     KC_TAB)
 #define LT_ESC LT(_MEDIA,     KC_ESCAPE)
 #define LT_BSP LT(_NUM,       KC_BSPACE)
 #define LT_RET  LT(_SYM,       KC_ENTER)
 #define LT_DEL LT(_FN,        KC_DELETE)
-#define LT_F      LT(_MACRO_R2,  KC_F)
+#define LT_F      KC_F
 #define LT_P      LT(_MACRO_R1,  KC_P)
 #define LT_L      LT(_MACRO_L1,  KC_L)
-#define LT_U      LT(_MACRO_L2,  KC_U)
+#define LT_U      KC_U
 #define LT_M      LT(_CA_NUM_L,  KC_M)
+#define LT_V      LT(_CA_NUM_R,  KC_V)
 
 #define Q_A  LGUI_T(KC_A)
 #define Q_R LALT_T(KC_R)
@@ -225,11 +183,11 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
-    TD(D_Q),   KC_W,   LT_F,   LT_P,   KC_G,                        TD(D_J),   LT_L,   LT_U,   KC_Y,  Q_QUO,
+       KC_Q,   KC_W,   LT_F,   LT_P,   KC_G,                        KC_J,   LT_L,   LT_U,   KC_Y,  Q_QUO,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
         Q_A,    Q_R,    Q_S,    Q_T,   KC_D,                           KC_H,    Q_N,    Q_E,    Q_I,    Q_O,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_Z,    Q_X,   KC_C,TD(D_V),   KC_B,                        TD(D_K),   LT_M,  Q_CMA,  Q_DOT,Q_SLASH,
+       KC_Z,    Q_X,   KC_C,   LT_V,   KC_B,                           KC_K,   LT_M,  Q_CMA,  Q_DOT,Q_SLASH,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                              LT_DEL, LT_BSP, LT_RET,         LT_TAB, LT_SPC, LT_ESC
  //                        |-------+-------+-------|       |-------+-------+-------|
@@ -322,29 +280,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                APPS,   APPS,   APPS,          KC_NO,  KC_NO,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
                             ),
-  [_MACRO_R2] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------.
-      RESET,  KC_NO,  KC_NO, KC_NO,   KC_NO,                          KC_NO,  KC_NO,  KC_NO, KC_NO,   KC_NO,          
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,   M_NA,  KC_NO,  KC_NO,  KC_NO,          
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  M_NVS,  KC_NO,  KC_NO,          
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                               KC_NO, KC_NO,  KC_NO,          M_LARW,  KC_NO,  KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
-                            ),
-
-  [_MACRO_L2] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------
-      KC_NO,  KC_NO,  KC_NO, M_PRO,   KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO, M_REAL,  M_SXP,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,  KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
-                            ),
   [_MACRO_L1] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------
       KC_NO,  M_WPM,M_FALSE,  M_PMX,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
@@ -362,9 +297,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
       KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO, M_NULL,  KC_NO,M_INTEGER,KC_NO,          
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,M_GMAIL, M_PIPE,  KC_NO,          
+      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  M_NVS,M_GMAIL, M_PIPE,  KC_NO,          
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,  KC_NO,  KC_NO,         M_ASGN,  KC_NO,  KC_NO
+                              KC_NO,  KC_NO,  KC_NO,         M_ASGN, M_LARW,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
                             )
 };
@@ -449,24 +384,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case M_LARW:
     if (record->event.pressed) {
       SEND_STRING("->");
-
-    }
-    break;
-  case M_PRO:
-    if (record->event.pressed) {
-      SEND_STRING("PROTECT");
-
-    }
-    break;
-  case M_REAL:
-    if (record->event.pressed) {
-      SEND_STRING("REAL");
-
-    }
-    break;
-  case M_SXP:
-    if (record->event.pressed) {
-      SEND_STRING("SXP");
 
     }
     break;
@@ -617,88 +534,6 @@ bool music_mask_user(uint16_t keycode) {
   }
 }
 
-
-
-/* Return an integer that corresponds to what kind of tap dance should be executed.
- *
- * How to figure out tap dance state: interrupted and pressed.
- *
- * Interrupted: If the state of a dance dance is "interrupted", that means that another key has been hit
- *  under the tapping term. This is typically indicitive that you are trying to "tap" the key.
- *
- * Pressed: Whether or not the key is still being pressed. If this value is true, that means the tapping term
- *  has ended, but the key is still being pressed down. This generally means the key is being "held".
- *
- * One thing that is currenlty not possible with qmk software in regards to tap dance is to mimic the "permissive hold"
- *  feature. In general, advanced tap dances do not work well if they are used with commonly typed letters.
- *  For example "A". Tap dances are best used on non-letter keys that are not hit while typing letters.
- *
- * Good places to put an advanced tap dance:
- *  z,q,x,j,k,v,b, any function key, home/end, comma, semi-colon
- *
- * Criteria for "good placement" of a tap dance key:
- *  Not a key that is hit frequently in a sentence
- *  Not a key that is used frequently to double tap, for example 'tab' is often double tapped in a terminal, or
- *    in a web form. So 'tab' would be a poor choice for a tap dance.
- *  Letters used in common words as a double. For example 'p' in 'pepper'. If a tap dance function existed on the
- *    letter 'p', the word 'pepper' would be quite frustating to type.
- *
- * For the third point, there does exist the 'TD_DOUBLE_SINGLE_TAP', however this is not fully tested
- *
- */
-td_state_t cur_dance(qk_tap_dance_state_t *state) {
-  if (state->count == 1) {
-    if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
-    // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
-    else return TD_SINGLE_HOLD;
-  } else if (state->count == 2) {
-    // TD_DOUBLE_SINGLE_TAP is to distinguish between typing "pepper", and actually wanting a double tap
-    // action when hitting 'pp'. Suggested use case for this return value is when you want to send two
-    // keystrokes of the key, and not the 'double tap' action/macro.
-    if (state->interrupted) return TD_DOUBLE_SINGLE_TAP;
-    else if (state->pressed) return TD_DOUBLE_HOLD;
-    else return TD_DOUBLE_TAP;
-  }
-
-  // Assumes no one is trying to type the same letter three times (at least not quickly).
-  // If your tap dance key is 'KC_W', and you want to type "www." quickly - then you will need to add
-  // an exception here to return a 'TD_TRIPLE_SINGLE_TAP', and define that enum just like 'TD_DOUBLE_SINGLE_TAP'
-  if (state->count == 3) {
-    if (state->interrupted || !state->pressed) return TD_TRIPLE_TAP;
-    else return TD_TRIPLE_HOLD;
-  } else return TD_UNKNOWN;
-}
-
-// Create an instance of 'td_tap_t' for the 'v' tap dance.
-static td_tap_t vtap_state = {
-  .is_press_action = true,
-  .state = TD_NONE
-};
-
-void v_finished(qk_tap_dance_state_t *state, void *user_data) {
-  vtap_state.state = cur_dance(state);
-  switch (vtap_state.state) {
-  case TD_SINGLE_TAP: register_code(KC_V); break;
-  case TD_SINGLE_HOLD: layer_on(_CA_NUM_R); break;
-  case TD_DOUBLE_TAP: register_code16(LALT(KC_F4)); break;
-  case TD_DOUBLE_HOLD: register_code(KC_V); break;
-  case TD_DOUBLE_SINGLE_TAP: tap_code(KC_V); register_code(KC_V);
-  default: break;
-  }
-}
-
-void v_reset(qk_tap_dance_state_t *state, void *user_data) {
-  switch (vtap_state.state) {
-  case TD_SINGLE_TAP: unregister_code(KC_V); break;
-  case TD_SINGLE_HOLD: layer_off(_CA_NUM_R); break;
-  case TD_DOUBLE_TAP: unregister_code16(LALT(KC_F4)); break;
-  case TD_DOUBLE_HOLD: unregister_code(KC_V);
-  case TD_DOUBLE_SINGLE_TAP: unregister_code(KC_V);
-  default: break;
-  }
-  vtap_state.state = TD_NONE;
-}
-
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
@@ -751,17 +586,11 @@ void oled_render_layer_state(void) {
       case _CA_NUM_L:
         oled_write_ln_P(PSTR("Layer: Left C/A Numbers"),false);
         break;
-      case _MACRO_L2:
-        oled_write_ln_P(PSTR("Layer: Left Macro #2"),false);
-        break;
       case _MACRO_L1:
-        oled_write_ln_P(PSTR("Layer: Left Macro #1"),false);
+        oled_write_ln_P(PSTR("Layer: Left Macro"),false);
         break;
       case _MACRO_R1:
-        oled_write_ln_P(PSTR("Layer: Right Macro #1"),false);
-        break; 
-      case _MACRO_R2:
-        oled_write_ln_P(PSTR("Layer: Right Macro #2"),false);
+        oled_write_ln_P(PSTR("Layer: Right Macro"),false);
         break; 
       default:
         snprintf(string, sizeof(string), "%ld",layer_state);
