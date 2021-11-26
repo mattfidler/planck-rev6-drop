@@ -29,9 +29,7 @@ enum planck_layers {
   _SYM,
   _FN,
   _CA_NUM_R,
-  _CA_NUM_L,
-  _MACRO_L1,
-  _MACRO_R1
+  _CA_NUM_L
 };
 
 enum planck_keycodes {
@@ -41,18 +39,12 @@ enum planck_keycodes {
   M_NA,
   M_NVS,
   M_LARW,
-  M_WPM,
   M_FALSE,
-  M_PMX,
   M_AIC,
   M_RxODE,
-  M_SEXP,
   M_TRUE,
-  M_DRAFT,
   M_CRAN,
-  M_BIC,
   M_NULL,
-  M_INTEGER,
   M_GMAIL,
   M_PIPE,
   M_ASGN,
@@ -82,8 +74,8 @@ enum planck_keycodes {
 #define LT_RET  LT(_SYM,       KC_ENTER)
 #define LT_DEL LT(_FN,        KC_DELETE)
 #define LT_F      KC_F
-#define LT_P      LT(_MACRO_R1,  KC_P)
-#define LT_L      LT(_MACRO_L1,  KC_L)
+#define LT_P      KC_P
+#define LT_L      KC_L
 #define LT_U      KC_U
 #define LT_M      LT(_CA_NUM_L,  KC_M)
 #define LT_V      LT(_CA_NUM_R,  KC_V)
@@ -264,9 +256,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
       QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,     
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         ACTL_6, ACTL_7, ACTL_8, ACTL_9, ACTL_0,           
+      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         M_NULL, M_NVS, M_GMAIL, M_PIPE,  KC_NO,           
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
+                              KC_NO,  KC_NO,  KC_NO,         M_ASGN, M_LARW,   APPS
  //                        |-------+-------+-------|       |-------+-------+-------|
                             ),
   [_CA_NUM_L] = LAYOUT_matt(
@@ -275,38 +267,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
       ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,        
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-     ACTL_1, ACTL_2, ACTL_3, ACTL_4, ACTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+     KC_NO, M_RxODE, M_CRAN,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                               APPS,   APPS,   APPS,          KC_NO,  KC_NO,  KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
-                            ),
-  [_MACRO_L1] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------
-      KC_NO,  M_WPM,M_FALSE,  M_PMX,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      M_AIC,M_RxODE, M_SEXP, M_TRUE,M_DRAFT,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO, M_CRAN,  KC_NO,  M_BIC,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                             KC_NO,   KC_NO,  KC_NO,          KC_NO,  KC_NO,  KC_NO
- //                        |-------+-------+-------|       |-------+-------+-------|
-                            ),
-  [_MACRO_R1] = LAYOUT_matt(
- //,---------------------------------------.                       ,---------------------------------------
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO, M_NULL,  KC_NO,M_INTEGER,KC_NO,          
- //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                          KC_NO,  M_NVS,M_GMAIL, M_PIPE,  KC_NO,          
- //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                              KC_NO,  KC_NO,  KC_NO,         M_ASGN, M_LARW,  KC_NO
+                               APPS, M_TRUE,M_FALSE,          KC_NO,  KC_NO,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
                             )
 };
 
-/* layer_state_t layer_state_set_user(layer_state_t state) { */
-/*   return update_tri_layer_state(state, _LOWER, _KC_NO, _ADJUST); */
-/* } */
 
 #define HM_A LGUI_T(KC_A)
 #define HM_R LALT_T(KC_R)
@@ -317,16 +284,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #define HM_E RCTL_T(KC_E)
 #define HM_I RALT_T(KC_I)
 #define HM_O RGUI_T(KC_O)
-
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-  case HM_T:
-  case HM_N:
-    return TAPPING_TERM;
-  default:
-    return TAPPING_TERM + 30;
-  }
-}
 
 bool isMouse = false;
 bool isMove = false;
@@ -387,21 +344,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     }
     break;
-  case M_WPM:
-    if (record->event.pressed) {
-      SEND_STRING("WPM");
-
-    }
-    break;
   case M_FALSE:
     if (record->event.pressed) {
       SEND_STRING("FALSE");
-
-    }
-    break;
-  case M_PMX:
-    if (record->event.pressed) {
-      SEND_STRING("PMX");
 
     }
     break;
@@ -417,20 +362,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     }
     break;
-  case M_SEXP:
-    if (record->event.pressed) {
-      SEND_STRING("SEXP");
-    }
-    break;
   case M_TRUE:
     if (record->event.pressed) {
       SEND_STRING("TRUE");
-
-    }
-    break;
-  case M_DRAFT:
-    if (record->event.pressed) {
-      SEND_STRING("DRAFT");
 
     }
     break;
@@ -440,21 +374,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     }
     break;
-  case M_BIC:
-    if (record->event.pressed) {
-      SEND_STRING("BIC");
-
-    }
-    break;
   case M_NULL:
     if (record->event.pressed) {
       SEND_STRING("NULL");
-
-    }
-    break;
-  case M_INTEGER:
-    if (record->event.pressed) {
-      SEND_STRING("INTEGER");
 
     }
     break;
@@ -586,12 +508,6 @@ void oled_render_layer_state(void) {
       case _CA_NUM_L:
         oled_write_ln_P(PSTR("Layer: Left C/A Numbers"),false);
         break;
-      case _MACRO_L1:
-        oled_write_ln_P(PSTR("Layer: Left Macro"),false);
-        break;
-      case _MACRO_R1:
-        oled_write_ln_P(PSTR("Layer: Right Macro"),false);
-        break; 
       default:
         snprintf(string, sizeof(string), "%ld",layer_state);
         oled_write_P(PSTR("Layer: Undef-"),false);
