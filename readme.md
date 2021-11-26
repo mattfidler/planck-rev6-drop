@@ -8,11 +8,14 @@ directory with:
 
 ```sh
 #!/bin/sh
+echo \#define MOON > keyboards/moonlander/keymaps/mattfidler/config-user.h
+echo include keyboards/moonlander/keymaps/mattfidler/planck.mk > keyboards/planck/keymaps/mattfidler/rules.mk
+make moonlander:mattfidler
 echo \#define PLANCK > keyboards/planck/keymaps/mattfidler/config-user.h
 echo include keyboards/planck/keymaps/mattfidler/planck.mk > keyboards/planck/keymaps/mattfidler/rules.mk
-#make planck/rev6_drop:mattfidler
+make planck/rev6_drop:mattfidler
 echo \#define CRKBD > keyboards/crkbd/keymaps/mattfidler/config-user.h
 echo include keyboards/crkbd/keymaps/mattfidler/crkbd.mk > keyboards/crkbd/keymaps/mattfidler/rules.mk
- make crkbd:mattfidler
+make crkbd:mattfidler
 ```
 
