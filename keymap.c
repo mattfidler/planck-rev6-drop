@@ -288,12 +288,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool isMouse = false;
 bool isMove = false;
 
-#ifdef OLED_ENABLE
+#ifdef OLED_DRIVER_ENABLE
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-#ifdef OLED_ENABLE
+#ifdef OLED_DRIVER_ENABLE
   if (record->event.pressed) {
     set_keylog(keycode, record);
   }
@@ -456,7 +456,7 @@ bool music_mask_user(uint16_t keycode) {
   }
 }
 
-#ifdef OLED_ENABLE
+#ifdef OLED_DRIVER_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
