@@ -151,7 +151,7 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #define MW_RGHT KC_MS_WH_LEFT
 
 #define MS_UP KC_MS_UP
-#define MS_DOWN KC_MS_LEFT
+#define MS_DOWN KC_MS_DOWN
 #define MS_LEFT KC_MS_LEFT
 #define MS_RGHT KC_MS_RIGHT
 #define MS_1 KC_MS_BTN1
@@ -1081,7 +1081,7 @@ void oled_render_logo(void) {
 }
 
 void oled_task_user(void) {
-    if (is_master) {
+    if (is_keyboard_master()) {
         oled_render_layer_state();
         oled_render_keylog();
     } else {
