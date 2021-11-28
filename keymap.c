@@ -171,6 +171,7 @@ enum planck_keycodes {
 #define ACTL_8 LALT(LCTL(KC_8))
 #define ACTL_9 LALT(LCTL(KC_9))
 #define ACTL_0 LALT(LCTL(KC_0))
+#define AF4    LALT(KC_F4)
 
 
 // Tap Dance declarations
@@ -393,7 +394,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
       ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,        
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-     KC_NO, M_RxODE, M_CRAN,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+     KC_NO, M_RxODE, M_CRAN,    AF4,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                                APPS, M_TRUE,M_FALSE,          KC_NO,  KC_NO,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
@@ -717,3 +718,4 @@ void oled_task_user(void) {
     }
 }
 #endif
+

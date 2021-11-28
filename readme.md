@@ -15,7 +15,9 @@ echo \#define PLANCK > keyboards/planck/keymaps/mattfidler/config-user.h
 echo include keyboards/planck/keymaps/mattfidler/planck.mk > keyboards/planck/keymaps/mattfidler/rules.mk
 make planck/rev6_drop:mattfidler
 echo \#define CRKBD > keyboards/crkbd/keymaps/mattfidler/config-user.h
+#echo \#define MASTER_LEFT >> keyboards/crkbd/keymaps/mattfidler/config-user.h
+echo \#define MASTER_RIGHT >> keyboards/crkbd/keymaps/mattfidler/config-user.h
 echo include keyboards/crkbd/keymaps/mattfidler/crkbd.mk > keyboards/crkbd/keymaps/mattfidler/rules.mk
-make crkbd:mattfidler
+make clean crkbd:mattfidler
 ```
 
