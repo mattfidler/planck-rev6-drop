@@ -19,6 +19,8 @@
 #ifdef USE_MUSE
 #include "muse.h"
 #endif
+#include "version.h"
+
 
 enum planck_layers {
   _COLEMAK,
