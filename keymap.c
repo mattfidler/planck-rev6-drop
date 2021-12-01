@@ -293,6 +293,16 @@ void v_reset(qk_tap_dance_state_t *state, void *user_data) {
    vtap_state.state = TD_NONE;
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+  case HM_T:
+  case HM_N:
+    return TAPPING_TERM;
+  default:
+    return TAPPING_TERM + 50;
+  }
+}
+
 #define D_J TD(TD_J)
 #define D_K TD(TD_K)
 #define D_V TD(TD_V)
