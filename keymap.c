@@ -173,6 +173,19 @@ enum planck_keycodes {
 #define ACTL_0 LALT(LCTL(KC_0))
 #define AF4    LALT(KC_F4)
 
+#define HM_A LGUI_T(KC_A)
+#define HM_R LALT_T(KC_R)
+#define HM_S LCTL_T(KC_S)
+#define HM_T LSFT_T(KC_T)
+
+#define HM_N RSFT_T(KC_N)
+#define HM_E RCTL_T(KC_E)
+#define HM_I RALT_T(KC_I)
+#define HM_O RGUI_T(KC_O)
+
+
+
+
 
 // Tap Dance declarations
 enum {
@@ -307,6 +320,7 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
 #define D_K TD(TD_K)
 #define D_V TD(TD_V)
 
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
@@ -408,17 +422,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //                        |-------+-------+-------|       |-------+-------+-------|
                             )
 };
-
-
-#define HM_A LGUI_T(KC_A)
-#define HM_R LALT_T(KC_R)
-#define HM_S LCTL_T(KC_S)
-#define HM_T LSFT_T(KC_T)
-
-#define HM_N RSFT_T(KC_N)
-#define HM_E RCTL_T(KC_E)
-#define HM_I RALT_T(KC_I)
-#define HM_O RGUI_T(KC_O)
 
 bool isMouse = false;
 bool isMove = false;
