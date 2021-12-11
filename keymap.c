@@ -35,11 +35,7 @@ enum planck_layers {
 };
 
 enum planck_keycodes {
-  COLEMAK= SAFE_RANGE,
-  KMOUSE,
-  KMOVE,
-  M_NA,
-  M_NVS,
+  M_NA= SAFE_RANGE,
   M_LARW,
   M_FALSE,
   M_AIC,
@@ -47,7 +43,6 @@ enum planck_keycodes {
   M_TRUE,
   M_CRAN,
   M_NULL,
-  M_GMAIL,
   M_PIPE,
   M_ASGN,
 };
@@ -341,7 +336,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
     MW_DOWN,MS_LEFT,MS_DOWN,MS_RGHT,  KC_NO,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       UNDO,    CUT,   COPY,  PASTE,   REDO,                         KC_NO,  KMOUSE,  KC_NO,  QRALT,  KC_NO,
+       UNDO,    CUT,   COPY,  PASTE,   REDO,                         KC_NO,  KC_NO,  KC_NO,  QRALT,  KC_NO,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                                MS_3,   MS_2,   MS_1,          KC_NO,  KC_NO,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
@@ -352,7 +347,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
     PG_DOWN,KC_LEFT,KC_DOWN,Q_RIGHT, Q_CAPS,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,        
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       UNDO,    CUT,   COPY,  PASTE,   REDO,                          KC_NO,  KMOVE,  KC_NO,  QRALT,  KC_NO,
+       UNDO,    CUT,   COPY,  PASTE,   REDO,                          KC_NO,  KC_NO,  KC_NO,  QRALT,  KC_NO,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                        KC_DELETE,  KC_BSPACE, KC_ENTER,       KC_NO, KC_NO, KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
@@ -407,7 +402,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
       QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,     
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         M_NULL, M_NVS, M_GMAIL, M_PIPE,  KC_NO,           
+      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         M_NULL, KC_NO,   KC_NO, M_PIPE,  KC_NO,           
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                               KC_NO,  KC_NO,  KC_NO,         M_ASGN, M_LARW,   APPS
  //                        |-------+-------+-------|       |-------+-------+-------|
@@ -439,61 +434,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 #endif
   switch (keycode) {
-  case KMOUSE:
-    if (record->event.pressed) {
-      if (isMouse) {
-        set_single_persistent_default_layer(_COLEMAK);
-        isMouse = false;
-        isMove = false;
-      } else {
-        set_single_persistent_default_layer(_MOUSE);
-        isMouse = true;
-        isMove = false;
-      }
-    }
-    return false;
-    break;
-  case KMOVE:
-    if (record->event.pressed) {
-      if (isMove) {
-        set_single_persistent_default_layer(_COLEMAK);
-        isMouse = false;
-        isMove = false;
-      } else {
-        set_single_persistent_default_layer(_MOVE);
-        isMouse = false;
-        isMove = true;
-      }
-    }
-    return false;
-    break;
   case M_NA:
     if (record->event.pressed) {
       SEND_STRING("NA");
     }
     break;
-  case M_NVS:
-    if (record->event.pressed) {
-      SEND_STRING("matt.fidler@novartis.com");
-
-    }
-    break;
   case M_LARW:
     if (record->event.pressed) {
       SEND_STRING("->");
-
     }
     break;
   case M_FALSE:
     if (record->event.pressed) {
       SEND_STRING("FALSE");
-
     }
     break;
   case M_AIC:
     if (record->event.pressed) {
       SEND_STRING("AIC");
-
     }
     break;
   case M_RxODE:
@@ -505,25 +463,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case M_TRUE:
     if (record->event.pressed) {
       SEND_STRING("TRUE");
-
     }
     break;
   case M_CRAN:
     if (record->event.pressed) {
       SEND_STRING("CRAN");
-
     }
     break;
   case M_NULL:
     if (record->event.pressed) {
       SEND_STRING("NULL");
-
-    }
-    break;
-  case M_GMAIL:
-    if (record->event.pressed) {
-      SEND_STRING("matthew.fidler@gmail.com");
-
     }
     break;
   case M_PIPE:
@@ -779,7 +728,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     break;
   }
-  return true;          
+  return true;
 }
 
 bool muse_mode = false;
@@ -964,13 +913,14 @@ void oled_render_logo(void) {
     oled_write_P(crkbd_logo, false);
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
         oled_render_keylog();
     } else {
         oled_render_logo();
     }
+    return true;
 }
 #endif
 
