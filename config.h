@@ -177,5 +177,5 @@ LAYOUT_split_3x5_3( \
 #define ORYX_CONFIGURATOR
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define RGB_MATRIX_STARTUP_SPD 60
-#define USE_MUSE
+//#define USE_MUSE
 #endif //MOON

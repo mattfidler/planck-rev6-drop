@@ -757,7 +757,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 
 void matrix_scan_user(void) {
-#ifdef AUDIO_ENABLE
+#ifdef USE_MUSE
   if (muse_mode) {
     if (muse_counter == 0) {
       uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
