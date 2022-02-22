@@ -29,7 +29,9 @@ enum planck_layers {
   _MEDIA,
   _NUM,
   _SYM,
-  _FN
+  _FN,
+  _CA_NUM_R,
+  _CA_NUM_L
 };
 
 enum planck_keycodes {
@@ -84,10 +86,11 @@ enum planck_keycodes {
 #define Q_I RALT_T(KC_I)
 #define Q_O RGUI_T(KC_O)
 #define Q_QUO KC_QUOTE
-#define Q_X KC_X
+#define Q_X RALT_T(KC_X)
 #define Q_CMA KC_COMMA
-#define Q_DOT KC_DOT
+#define Q_DOT LALT_T(KC_DOT)
 #define Q_SLASH KC_SLASH
+
 
 #define MW_UP   KC_MS_WH_UP
 #define MW_DOWN KC_MS_WH_DOWN
@@ -194,9 +197,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
         Q_A,    Q_R,    Q_S,    Q_T,   KC_D,                           KC_H,    Q_N,    Q_E,    Q_I,    Q_O,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_Z,    Q_X,   KC_C,   KC_V,   KC_B,                           KC_K,   KC_M,  Q_CMA,  Q_DOT,Q_SLASH,
+       KC_Z,    Q_X,   KC_C,   LT_V,   KC_B,                           KC_K,   LT_M,  Q_CMA,  Q_DOT,Q_SLASH,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
-                               LT_DEL, LT_BSP, LT_RET,       LT_TAB, LT_SPC, LT_ESC
+                             LT_DEL, LT_BSP, LT_RET,         LT_TAB, LT_SPC, LT_ESC
  //                        |-------+-------+-------|       |-------+-------+-------|
                            ),
   [_MOUSE] = LAYOUT_matt(
@@ -264,7 +267,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                               KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
  //                        |-------+-------+-------|       |-------+-------+-------|
-                      )
+                      ),
+  [_CA_NUM_R] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------.
+      RESET,  KC_NO, KC_NO,   KC_NO,  KC_NO,                          CTL_6,  CTL_7,  CTL_8,  CTL_9,  CTL_0,
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,     
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         M_NULL, KC_NO,   KC_NO, M_PIPE,  KC_NO,           
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                              KC_NO,  KC_NO,  KC_NO,         M_ASGN, M_LARW,   APPS
+ //                        |-------+-------+-------|       |-------+-------+-------|
+                            ),
+  [_CA_NUM_L] = LAYOUT_matt(
+ //,---------------------------------------.                       ,---------------------------------------.
+      CTL_1,  CTL_2,  CTL_3,  CTL_4,  CTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+      ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,        
+ //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
+     KC_NO, M_RxODE, M_CRAN,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
+ //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
+                               APPS, M_TRUE,M_FALSE,          KC_NO,  KC_NO,  KC_NO
+ //                        |-------+-------+-------|       |-------+-------+-------|
+                            )
 };
 
 bool isMouse = false;
@@ -274,98 +299,6 @@ bool isMove = false;
 void set_keylog(uint16_t keycode, keyrecord_t *record);
 #endif
 
-#define LEFT  1
-#define RIGHT 2
- 
-static struct column_event {
-  uint16_t key_timer;
-  uint16_t keycode;
-  uint8_t  shift;
-  uint8_t  side;
-} e[10];
- 
-static uint8_t next_key = 0;
-static uint8_t prev_key = 0;
- 
-void clear_events(void)
-{
-  for (uint8_t i = 0; i < 10; i++) { e[i].key_timer = 0; }
-}
-
-static uint8_t mods = 0;
- 
-void register_modifier(uint16_t keycode)
-{
-  register_code(keycode);
-  mods |= MOD_BIT(keycode);
-}
- 
-void unregister_modifier(uint16_t keycode)
-{
-  unregister_code(keycode);
-  mods &= ~(MOD_BIT(keycode));
-}
- 
-void mod_all(void (*f)(uint8_t))
-{
-  if (mods & MOD_BIT(KC_LGUI)) { f(KC_LGUI); }
-  if (mods & MOD_BIT(KC_LCTL)) { f(KC_LCTL); }
-  if (mods & MOD_BIT(KC_LALT)) { f(KC_LALT); }
-  if (mods & MOD_BIT(KC_LSFT)) { f(KC_LSFT); }
-  if (mods & MOD_BIT(KC_RSFT)) { f(KC_RSFT); }
-  if (mods & MOD_BIT(KC_RALT)) { f(KC_RALT); }
-  if (mods & MOD_BIT(KC_RCTL)) { f(KC_RCTL); }
-  if (mods & MOD_BIT(KC_RGUI)) { f(KC_RGUI); }
-}
-
-
-void tap_key(uint16_t keycode)
-{
-  register_code  (keycode);
-  unregister_code(keycode);
-}
- 
-void tap_shift(uint16_t keycode)
-{
-  register_code  (KC_LSFT);
-  tap_key        (keycode);
-  unregister_code(KC_LSFT);
-}
-
-#define SHIFT 1
-#define NOSHIFT 0
-
-void mod_roll(keyrecord_t *record, uint8_t side, uint8_t shift, uint16_t modifier, uint16_t keycode, uint8_t column)
-{
-  if (record->event.pressed) {
-    e[column].key_timer = timer_read();
-    e[column].keycode   = keycode;
-    e[column].shift     = shift;
-    e[column].side      = side;
-    prev_key            = next_key;
-    next_key            = column;
-    if (modifier) {
-      register_modifier(modifier);
-    }
-  } else {
-    if (modifier) { unregister_modifier(modifier); }
-    if (timer_elapsed(e[column].key_timer) < TAPPING_TERM) {
-      if (e[column].key_timer < e[next_key].key_timer) {
-        mod_all(unregister_code);
-        if (e[column].shift && (e[column].side != e[next_key].side)) { 
-          tap_shift(e[next_key].keycode);
-          e[next_key].key_timer = 0;
-        }
-        else { tap_key(keycode); }
-      }
-      else { tap_key(keycode); e[prev_key].key_timer = 0; }
-    }
-    e[column].key_timer = 0;
-  }
-}
-
-
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 #ifdef OLED_ENABLE
   if (record->event.pressed) {
@@ -373,74 +306,299 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 #endif
   switch (keycode) {
-    // home keys
-    //         Q_A,    Q_R,    Q_S,    Q_T,   KC_D,                           KC_H,    Q_N,    Q_E,    Q_I,    Q_O,
-  case Q_A:
-    mod_roll(record, LEFT, NOSHIFT, KC_LGUI, Q_A, 0);  break;
-  case Q_R:
-    mod_roll(record, LEFT, NOSHIFT, KC_LALT, Q_R, 1);  break;
-  case Q_S:
-    mod_roll(record, LEFT, NOSHIFT, KC_LCTL, Q_S, 2);  break;
-  case Q_T:
-    mod_roll(record, LEFT, SHIFT,   KC_LSFT, Q_T, 3); break;
-  case KC_D:
-    mod_roll(record, LEFT, NOSHIFT, 0, KC_D, 4);   return false;
-  case KC_H:
-    mod_roll(record, RIGHT, NOSHIFT, 0, KC_H, 5);   return false;
-  case Q_N:
-    mod_roll(record, RIGHT, SHIFT,  KC_RSFT,  Q_N, 6); break;
-  case Q_E:
-    mod_roll(record, RIGHT, NOSHIFT, KC_RCTL, Q_E, 7); break;
-  case Q_I:
-    mod_roll(record, RIGHT, NOSHIFT, KC_RALT, Q_I, 8); break;
-  case Q_O:
-    mod_roll(record, RIGHT, NOSHIFT, KC_RGUI, Q_O, 9); break;    
-//        KC_Q,   KC_W,   LT_F,   LT_P,   KC_G,                           KC_J,   LT_L,   LT_U,   KC_Y,  Q_QUO,
-    // Top row
-  case KC_Q:
-    mod_roll(record, LEFT, NOSHIFT, 0, KC_Q, 0);    return false;
-  case KC_W:
-    mod_roll(record, LEFT, NOSHIFT, 0, KC_W, 1);    return false;
-  case LT_F:
-    mod_roll(record, LEFT, NOSHIFT, 0, LT_F, 2);    return false;
-  case LT_P:
-    mod_roll(record, LEFT, NOSHIFT, 0, LT_P, 3);    return false;
-  case KC_G:
-    mod_roll(record, LEFT, NOSHIFT, 0, KC_G, 4);    return false;
-    
-  case KC_J:
-    mod_roll(record, RIGHT, NOSHIFT, 0, KC_J, 5);    return false;
-  case LT_L:
-    mod_roll(record, RIGHT, NOSHIFT, 0, LT_L, 6);    return false;
-  case LT_U:
-    mod_roll(record, RIGHT, NOSHIFT, 0, LT_U, 7);    return false;
-  case KC_Y:
-    mod_roll(record, RIGHT, NOSHIFT, 0, KC_Y, 8);    return false;
-  case Q_QUO:
-    mod_roll(record, RIGHT, NOSHIFT, 0, Q_QUO, 9);    return false;
-    // Last rows
-    //        KC_Z,    Q_X,   KC_C,   KC_V,   KC_B,                           KC_K,   KC_M,  Q_CMA,  Q_DOT,Q_SLASH,
-  case KC_Z:
-    mod_roll(record, LEFT, NOSHIFT, 0, KC_Z, 0);    return false;
-  case Q_X:
-    mod_roll(record, LEFT, NOSHIFT, 0, Q_X, 1);    return false;
-  case KC_C:
-    mod_roll(record, LEFT, NOSHIFT, 0, KC_C, 2);    return false;
-  case KC_V:
-    mod_roll(record, LEFT, NOSHIFT, 0, KC_V, 3);    return false;
-  case KC_B:
-    mod_roll(record, LEFT, NOSHIFT, 0, KC_B, 4);    return false;
+  case M_NA:
+    if (record->event.pressed) {
+      SEND_STRING("NA");
+    }
+    break;
+  case M_LARW:
+    if (record->event.pressed) {
+      SEND_STRING("->");
+    }
+    break;
+  case M_FALSE:
+    if (record->event.pressed) {
+      SEND_STRING("FALSE");
+    }
+    break;
+  case M_AIC:
+    if (record->event.pressed) {
+      SEND_STRING("AIC");
+    }
+    break;
+  case M_RxODE:
+    if (record->event.pressed) {
+      SEND_STRING("RxODE");
 
-  case KC_K:
-    mod_roll(record, RIGHT, NOSHIFT, 0, KC_K, 5);    return false;
-  case KC_M:
-    mod_roll(record, RIGHT, NOSHIFT, 0, KC_M, 6);    return false;
-  case Q_CMA:
-    mod_roll(record, RIGHT, NOSHIFT, 0, Q_CMA, 7);    return false;
-  case Q_DOT:
-    mod_roll(record, RIGHT, NOSHIFT, 0, Q_DOT, 8);    return false;
-  case Q_SLASH:
-    mod_roll(record, RIGHT, NOSHIFT, 0, Q_SLASH, 9);    return false;
+    }
+    break;
+  case M_TRUE:
+    if (record->event.pressed) {
+      SEND_STRING("TRUE");
+    }
+    break;
+  case M_CRAN:
+    if (record->event.pressed) {
+      SEND_STRING("CRAN");
+    }
+    break;
+  case M_NULL:
+    if (record->event.pressed) {
+      SEND_STRING("NULL");
+    }
+    break;
+  case M_PIPE:
+    if (record->event.pressed) {
+      SEND_STRING("%>%");
+    }
+    break;
+  case M_ASGN:
+    if (record->event.pressed) {
+      SEND_STRING("<-");
+    }
+    // http://norvig.com/mayzner.html
+    // th = 3.56% (Alternating hand bigram)
+    // he = 3.07% (H is not home row)
+    // in = 2.43%
+    // er = 2.05% Alternating hand // ctrl 
+    // an = 1.99% Alternating hand // win n
+    // re = 1.85% Alternating hand // alt e
+    // on = 1.76%
+    // at = 1.49%
+    // en = 1.45%
+    // nd = 1.35% Alternating hand // D
+    // ti = 1.34% Alternating hand // I
+    // es = 1.34% Alternating hand // ctrl s
+    // or = 1.28% Alternating hand // run command redundant with simple windows key
+    // te = 1.20% Alternating hand // E
+    // of = 1.17% Alternating hand // win + f
+    // ed = 1.17% Alternating hand // ctrl d
+    // is = 1.13% Alternating hand // alt s
+    // it = 1.12% Alternating hand // alt t
+    // al = 1.09% Alternating hand // win l
+    // ar = 1.07%
+    // st = 1.05%
+    // to = 1.04% Alternating hand // O
+    // nt = 1.04% Alternating hand // T 
+    // ng = 0.95% Alternating hand // G
+    // se = 0.93% Alternating hand // ctrl e
+    // ha = 0.93% Alternating hand // non home row modifiers
+    // as = 0.87%
+    // ou = 0.87%
+    // io = 0.83%
+    // le = 0.83% no home row mods
+    // ve = 0.83% no home row mods
+    // co = 0.79% alternating hands 
+    // me = 0.79% no home row mods 
+    // de = 0.76% no howe row mods
+    // hi = 0.73% no home row mods
+    // ri = 0.73% Alternating hands alt i
+    // ro = 0.73% Alternating hands alt o
+    // ic = 0.70% Alternating hands alt c
+    // ne = 0.69%
+
+    // Bigrams that do not exist jq, qg, qy, qz, wq, and qz
+
+
+    // common bigraphs that contain home row mods on same hand
+    // ou, in, st, en
+  case HM_R:
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RGUI)) {
+        // or = 1.28% Alternating hand // run command redundant with simple windows key
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_R);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
+      } else if (get_mods() & MOD_BIT(KC_LGUI)) {
+        // ar 1.07% 
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_R);
+        add_mods(MOD_BIT(KC_LGUI));
+        return false;
+      }
+    }
+    return true;
+  case LT_F:
+    //// of = 1.17% Alternating hand // win + f
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RGUI)) {
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_F);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
+      }
+    }
+    return true;
+  case LT_L:
+    //al = 1.09% Alternating hand
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_LGUI)) {
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_L);
+        add_mods(MOD_BIT(KC_LGUI));
+        return false;
+      }
+    }
+    return true;
+  case LT_M:
+    // om bigraph
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RGUI)) {
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_M);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
+      } else if (get_mods() & MOD_BIT(KC_RCTL)) {
+        // em bigraph
+        unregister_mods(MOD_BIT(KC_RCTL));
+        tap_code(KC_E);
+        tap_code(KC_M);
+        add_mods(MOD_BIT(KC_RCTL));
+        return false;
+      }
+    }
+    return true;
+  case LT_U:
+    // handle ou case and send ou for gui right+u
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RGUI)) {
+        // ou = 0.87%
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_U);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
+      }
+    }
+    return true; 
+  case HM_T:
+    // handles st
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_LGUI)) {
+        // handle at 1.49%
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_T);
+        unregister_mods(MOD_BIT(KC_LGUI));
+        return false;
+      } else if (get_mods() & MOD_BIT(KC_LCTL)) {
+        // handle st 1.05%
+        unregister_mods(MOD_BIT(KC_LCTL));
+        tap_code(KC_S);
+        tap_code(KC_T);
+        add_mods(MOD_BIT(KC_LCTL));
+        return false;
+      }
+    }
+    return true; 
+  case HM_N:
+    // handle en and in
+    if (record->tap.count > 0) {
+      uint8_t current_mods = get_mods();
+      if (current_mods & MOD_BIT(KC_RALT)) {
+        // in 2.43%
+        unregister_mods(MOD_BIT(KC_RALT));
+        tap_code(KC_I);
+        tap_code(KC_N);
+        add_mods(MOD_BIT(KC_RALT));
+        return false;
+      } else if (current_mods & MOD_BIT(KC_LGUI))  {
+        //an = 1.99% Alternating hand
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_N);
+        add_mods(MOD_BIT(KC_LGUI));
+        return false;
+      } else if (current_mods & MOD_BIT(KC_RGUI)) {
+        // on 1.76%
+        unregister_mods(MOD_BIT(KC_RGUI));
+        tap_code(KC_O);
+        tap_code(KC_N);
+        add_mods(MOD_BIT(KC_RGUI));
+        return false;
+      } else if (current_mods & MOD_BIT(KC_RCTL)) {
+        // en 1.45%
+        unregister_mods(MOD_BIT(KC_RCTL));
+        tap_code(KC_E);
+        tap_code(KC_N);
+        add_mods(MOD_BIT(KC_RCTL));
+        return false;
+      }
+    }
+    return true;
+  case HM_S:
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_LGUI)) {
+        // as 0.87%
+        unregister_mods(MOD_BIT(KC_LGUI));
+        tap_code(KC_A);
+        tap_code(KC_S);
+        add_mods(MOD_BIT(KC_LGUI));
+        return false;
+      }
+      return true;
+    }
+  case HM_O:
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RALT)) {
+        // handle io 0.83%
+        unregister_mods(MOD_BIT(KC_RALT));
+        tap_code(KC_I);
+        tap_code(KC_O);
+        add_mods(MOD_BIT(KC_RALT));
+        return false;
+      }
+    }
+    return true;
+  case HM_E:
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RSHIFT)) {
+        // ne
+        unregister_mods(MOD_BIT(KC_RSHIFT));
+        tap_code(KC_N);
+        tap_code(KC_E);
+        add_mods(MOD_BIT(KC_RSHIFT));
+        return false;
+      }
+    }
+    return true;
+  case HM_A:
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RALT)) {
+        // ra
+        unregister_mods(MOD_BIT(KC_RALT));
+        tap_code(KC_R);
+        tap_code(KC_A);
+        add_mods(MOD_BIT(KC_RALT));
+        return false;
+      }
+    }
+    return true;
+  case LT_SPC:
+    if (record->tap.count > 0) {
+      if (get_mods() & MOD_BIT(KC_RSHIFT)) {
+        // n 
+        unregister_mods(MOD_BIT(KC_RSHIFT));
+        tap_code(KC_N);
+        tap_code(KC_SPC);
+        add_mods(MOD_BIT(KC_RSHIFT));
+        return false;
+      } else if (get_mods() & MOD_BIT(KC_LSHIFT)) {
+        // t 
+        unregister_mods(MOD_BIT(KC_LSHIFT));
+        tap_code(KC_T);
+        tap_code(KC_SPC);
+        add_mods(MOD_BIT(KC_LSHIFT));
+        return false;
+      }
+    }
+    break;
   }
   return true;
 }
@@ -489,10 +647,6 @@ void matrix_scan_user(void) {
     }
   }
 #endif
-}
-
-void matrix_init_user(void) {
-  clear_events();
 }
 
 bool music_mask_user(uint16_t keycode) {
@@ -550,6 +704,12 @@ void oled_render_layer_state(void) {
         break;
       case _FN:
         oled_write_ln_P(PSTR("Layer: Function"),false);
+        break;
+      case _CA_NUM_R:
+        oled_write_ln_P(PSTR("Layer: Right C/A Numbers"),false);
+        break;
+      case _CA_NUM_L:
+        oled_write_ln_P(PSTR("Layer: Left C/A Numbers"),false);
         break;
       default:
         snprintf(string, sizeof(string), "%ld",layer_state);
