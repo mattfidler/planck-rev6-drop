@@ -86,9 +86,9 @@ enum planck_keycodes {
 #define Q_I RALT_T(KC_I)
 #define Q_O RGUI_T(KC_O)
 #define Q_QUO KC_QUOTE
-#define Q_X RALT_T(KC_X)
+#define Q_X KC_X
 #define Q_CMA KC_COMMA
-#define Q_DOT LALT_T(KC_DOT)
+#define Q_DOT KC_DOT
 #define Q_SLASH KC_SLASH
 
 
