@@ -177,7 +177,7 @@ enum planck_keycodes {
 
 #define HM_N RSFT_T(KC_N)
 #define HM_E RCTL_T(KC_E)
-#define HM_I RALT_T(KC_I)
+#define HM_I LALT_T(KC_I)
 #define HM_O RGUI_T(KC_O)
 
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
