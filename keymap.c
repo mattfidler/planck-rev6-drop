@@ -74,8 +74,11 @@ enum planck_keycodes {
 #define LT_P      KC_P
 #define LT_L      KC_L
 #define LT_U      KC_U
-#define LT_M      LT(_CA_NUM_L,  KC_M)
-#define LT_V      LT(_CA_NUM_R,  KC_V)
+//#define LT_M      LT(_CA_NUM_L,  KC_M)
+#define LT_M      KC_M
+#define LT_C      LT(_CA_NUM_R, KC_C)
+//#define LT_V      LT(_CA_NUM_R,  KC_V)
+#define LT_V      KC_V
 
 #define Q_A  LGUI_T(KC_A)
 #define Q_R LALT_T(KC_R)
@@ -87,7 +90,7 @@ enum planck_keycodes {
 #define Q_O RGUI_T(KC_O)
 #define Q_QUO KC_QUOTE
 #define Q_X KC_X
-#define Q_CMA KC_COMMA
+#define Q_CMA LT(_CA_NUM_L, KC_COMMA)
 #define Q_DOT KC_DOT
 #define Q_SLASH KC_SLASH
 
@@ -197,7 +200,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
         Q_A,    Q_R,    Q_S,    Q_T,   KC_D,                           KC_H,    Q_N,    Q_E,    Q_I,    Q_O,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-       KC_Z,    Q_X,   KC_C,   LT_V,   KC_B,                           KC_K,   LT_M,  Q_CMA,  Q_DOT,Q_SLASH,
+       KC_Z,    Q_X,   LT_C,   LT_V,   KC_B,                           KC_K,   LT_M,  Q_CMA,  Q_DOT,Q_SLASH,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                              LT_DEL, LT_BSP, LT_RET,         LT_TAB, LT_SPC, LT_ESC
  //                        |-------+-------+-------|       |-------+-------+-------|
@@ -217,7 +220,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //,---------------------------------------.                       ,---------------------------------------.
     KC_PGUP,KC_HOME,  KC_UP, KC_END,  Q_INS,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  RESET,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-    PG_DOWN,KC_LEFT,KC_DOWN,Q_RIGHT, Q_CAPS,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,        
+    PG_DOWN,KC_LEFT,KC_DOWN,Q_RIGHT, Q_CAPS,                          KC_NO,QLSHIFT, QLCTRL,  QLALT,  QLGUI,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
        UNDO,    CUT,   COPY,  PASTE,   REDO,                          KC_NO,  KC_NO,  KC_NO,  QRALT,  KC_NO,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
@@ -230,7 +233,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
     RGB_VAD,   PREV,VOL_DOWN,  NEXT,  KC_NO,                          KC_NO,QLSHIFT, QLCTRL, QLALT,   QLGUI,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-    RGB_TOG,RGB_MOD,RGB_HUD,RGB_HUI,RGB_MOD,                          KC_NO,  KC_NO,  KC_NO,  QRALT,  KC_NO,          
+    RGB_TOG,RGB_MOD,RGB_HUD,RGB_HUI,RGB_MOD,                          KC_NO,  KC_NO,  KC_NO,  QRALT,  KC_NO,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                                MUTE,   PLAY,   STOP,          KC_NO,  KC_NO,  KC_NO
  //                        |-------+-------+-------|       |-------+-------+-------|
@@ -248,22 +251,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                        ),
   [_SYM] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
-      RESET, KC_NO,   KC_NO,  KC_NO,  KC_NO,                        KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,        
+      RESET, KC_NO,   KC_NO,  KC_NO,  KC_NO,                        KC_LCBR,KC_AMPR,KC_ASTR,KC_LPRN,KC_RCBR,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
       QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                        KC_PLUS, KC_DLR,KC_PERC,KC_CIRC,KC_COLN,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                        KC_PIPE,KC_EXLM,  KC_AT,KC_HASH,KC_TILD,        
+      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                        KC_PIPE,KC_EXLM,  KC_AT,KC_HASH,KC_TILD,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                               KC_NO,  KC_NO,  KC_NO,        KC_UNDS,KC_LPRN,KC_RPRN
  //                        |-------+-------+-------|       |-------+-------+-------|
                        ),
   [_FN] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
-      RESET,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_PSCREEN,  KC_F7,  KC_F8,  KC_F9, KC_F12,         
+      RESET,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                     KC_PSCREEN,  KC_F7,  KC_F8,  KC_F9, KC_F12,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                  KC_SCROLLLOCK,  KC_F4,  KC_F5,  KC_F6, KC_F11,         
+      QLGUI,  QLALT, QLCTRL,QLSHIFT,  KC_NO,                  KC_SCROLLLOCK,  KC_F4,  KC_F5,  KC_F6, KC_F11,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                       KC_PAUSE,  KC_F1,  KC_F2,  KC_F3, KC_F10,         
+      KC_NO,  QRALT,  KC_NO,  KC_NO,  KC_NO,                       KC_PAUSE,  KC_F1,  KC_F2,  KC_F3, KC_F10,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                               KC_NO,  KC_NO,  KC_NO,           APPS,   APPS,   APPS
  //                        |-------+-------+-------|       |-------+-------+-------|
@@ -272,18 +275,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  //,---------------------------------------.                       ,---------------------------------------.
       RESET,  KC_NO, KC_NO,   KC_NO,  KC_NO,                          CTL_6,  CTL_7,  CTL_8,  CTL_9,  CTL_0,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,     
+      QLGUI, QLSHIFT,QLSHIFT,QLSHIFT,  KC_NO,                          ALT_6,  ALT_7,  ALT_8,  ALT_9,  ALT_0,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         M_NULL, KC_NO,   KC_NO, M_PIPE,  KC_NO,           
+      KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                         M_NULL, KC_NO,   KC_NO, M_PIPE,  KC_NO,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
                               KC_NO,  KC_NO,  KC_NO,         M_ASGN, M_LARW,   APPS
  //                        |-------+-------+-------|       |-------+-------+-------|
                             ),
   [_CA_NUM_L] = LAYOUT_matt(
  //,---------------------------------------.                       ,---------------------------------------.
-      CTL_1,  CTL_2,  CTL_3,  CTL_4,  CTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,          
+      CTL_1,  CTL_2,  CTL_3,  CTL_4,  CTL_5,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
-      ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,        
+      ALT_1,  ALT_2,  ALT_3,  ALT_4,  ALT_5,                          KC_NO,QLSHIFT,QRSHIFT,QRSHIFT,  QLGUI,
  //|-------+-------+-------+-------+-------|                       |-------+-------+-------+-------+-------|
      KC_NO, M_RxODE, M_CRAN,  KC_NO,  KC_NO,                          KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
  //|-------+-------+-------+-------+-------+-------|       |-------+-------+-------+-------+-------+-------|
@@ -360,7 +363,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // th = 3.56% (Alternating hand bigram)
     // he = 3.07% (H is not home row)
     // in = 2.43%
-    // er = 2.05% Alternating hand // ctrl 
+    // er = 2.05% Alternating hand // ctrl
     // an = 1.99% Alternating hand // win n
     // re = 1.85% Alternating hand // alt e
     // on = 1.76%
@@ -379,7 +382,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // ar = 1.07%
     // st = 1.05%
     // to = 1.04% Alternating hand // O
-    // nt = 1.04% Alternating hand // T 
+    // nt = 1.04% Alternating hand // T
     // ng = 0.95% Alternating hand // G
     // se = 0.93% Alternating hand // ctrl e
     // ha = 0.93% Alternating hand // non home row modifiers
@@ -388,8 +391,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // io = 0.83%
     // le = 0.83% no home row mods
     // ve = 0.83% no home row mods
-    // co = 0.79% alternating hands 
-    // me = 0.79% no home row mods 
+    // co = 0.79% alternating hands
+    // me = 0.79% no home row mods
     // de = 0.76% no howe row mods
     // hi = 0.73% no home row mods
     // ri = 0.73% Alternating hands alt i
@@ -412,7 +415,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         add_mods(MOD_BIT(KC_RGUI));
         return false;
       } else if (get_mods() & MOD_BIT(KC_LGUI)) {
-        // ar 1.07% 
+        // ar 1.07%
         unregister_mods(MOD_BIT(KC_LGUI));
         tap_code(KC_A);
         tap_code(KC_R);
@@ -476,7 +479,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
     }
-    return true; 
+    return true;
   case HM_T:
     // handles st
     if (record->tap.count > 0) {
@@ -496,7 +499,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
       }
     }
-    return true; 
+    return true;
   case HM_N:
     // handle en and in
     if (record->tap.count > 0) {
@@ -583,14 +586,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   case LT_SPC:
     if (record->tap.count > 0) {
       if (get_mods() & MOD_BIT(KC_RSHIFT)) {
-        // n 
+        // n
         unregister_mods(MOD_BIT(KC_RSHIFT));
         tap_code(KC_N);
         tap_code(KC_SPC);
         add_mods(MOD_BIT(KC_RSHIFT));
         return false;
       } else if (get_mods() & MOD_BIT(KC_LSHIFT)) {
-        // t 
+        // t
         unregister_mods(MOD_BIT(KC_LSHIFT));
         tap_code(KC_T);
         tap_code(KC_SPC);
@@ -795,4 +798,3 @@ bool oled_task_user(void) {
     return true;
 }
 #endif
-
