@@ -78,6 +78,7 @@ enum planck_keycodes {
 #define LT_C      LT(_CA_NUM_R, KC_C)
 //#define LT_V      LT(_CA_NUM_R,  KC_V)
 #define LT_V      KC_V
+#define RESET QK_BOOT
 
 #define Q_A  LGUI_T(KC_A)
 #define Q_R LALT_T(KC_R)
@@ -691,71 +692,70 @@ const char *read_mode_icon(bool swap);
 
 void oled_render_layer_state(void) {
   char string [24];
-  switch (get_highest_layer(default_layer_state|layer_state))
-  {
-      case _COLEMAK:
-        oled_write_ln_P(PSTR("Layer: COLEMAK"),false);
-        break;
-      case _MOUSE:
-        oled_write_ln_P(PSTR("Layer: MOUSE"),false);
-        break;
-      case _MOVE:
-        oled_write_ln_P(PSTR("Layer: MOVE"),false);
-        break;
-      case _MEDIA:
-        oled_write_ln_P(PSTR("Layer: MEDIA"),false);
-        break;
-      case _NUM:
-        oled_write_ln_P(PSTR("Layer: Numbers"),false);
-        break;
-      case _SYM:
-        oled_write_ln_P(PSTR("Layer: Symbols"),false);
-        break;
-      case _FN:
-        oled_write_ln_P(PSTR("Layer: Function"),false);
-        break;
-      case _CA_NUM_R:
-        oled_write_ln_P(PSTR("Layer: Right C/A Numbers"),false);
-        break;
-      case _CA_NUM_L:
-        oled_write_ln_P(PSTR("Layer: Left C/A Numbers"),false);
-        break;
-      default:
-        snprintf(string, sizeof(string), "%ld",layer_state);
-        oled_write_P(PSTR("Layer: Undef-"),false);
-        oled_write_ln(string, false);
-    }
- }
-
-/*
-void matrix_render_user(struct CharacterMatrix *matrix) {
-  if (has_usb()) {
-    // If you want to change the display of OLED, you need to change here
-    matrix_write_ln(matrix, read_layer_state());
-    matrix_write_ln(matrix, read_keylog());
-    //matrix_write_ln(matrix, read_keylogs());
-    //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
-    //matrix_write_ln(matrix, read_host_led_state());
-    //matrix_write_ln(matrix, read_timelog());
-  } else {
-    matrix_write(matrix, read_logo());
+  switch (get_highest_layer(default_layer_state|layer_state)) {
+  case _COLEMAK:
+    oled_write_ln_P(PSTR("Layer: COLEMAK"),false);
+    break;
+  case _MOUSE:
+    oled_write_ln_P(PSTR("Layer: MOUSE"),false);
+    break;
+  case _MOVE:
+    oled_write_ln_P(PSTR("Layer: MOVE"),false);
+    break;
+  case _MEDIA:
+    oled_write_ln_P(PSTR("Layer: MEDIA"),false);
+    break;
+  case _NUM:
+    oled_write_ln_P(PSTR("Layer: Numbers"),false);
+    break;
+  case _SYM:
+    oled_write_ln_P(PSTR("Layer: Symbols"),false);
+    break;
+  case _FN:
+    oled_write_ln_P(PSTR("Layer: Function"),false);
+    break;
+  case _CA_NUM_R:
+    oled_write_ln_P(PSTR("Layer: Right C/A Numbers"),false);
+    break;
+  case _CA_NUM_L:
+    oled_write_ln_P(PSTR("Layer: Left C/A Numbers"),false);
+    break;
+  default:
+    snprintf(string, sizeof(string), "%ld",layer_state);
+    oled_write_P(PSTR("Layer: Undef-"),false);
+    oled_write_ln(string, false);
   }
 }
+
+/*
+  void matrix_render_user(struct CharacterMatrix *matrix) {
+  if (has_usb()) {
+  // If you want to change the display of OLED, you need to change here
+  matrix_write_ln(matrix, read_layer_state());
+  matrix_write_ln(matrix, read_keylog());
+  //matrix_write_ln(matrix, read_keylogs());
+  //matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
+  //matrix_write_ln(matrix, read_host_led_state());
+  //matrix_write_ln(matrix, read_timelog());
+  } else {
+  matrix_write(matrix, read_logo());
+  }
+  }
 */
 
 char keylog_str[24] = {};
 const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
+  ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+  'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+  'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+  '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
+  'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
+  '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
 
 void set_keylog(uint16_t keycode, keyrecord_t *record) {
   char name = ' ';
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
-        (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
+  if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
+      (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) { keycode = keycode & 0xFF; }
   if (keycode < 60) {
     name = code_to_name[keycode];
   }
@@ -767,40 +767,40 @@ void set_keylog(uint16_t keycode, keyrecord_t *record) {
 }
 
 void oled_render_keylog(void) {
-    oled_write(keylog_str, false);
+  oled_write(keylog_str, false);
 }
 
 void render_bootmagic_status(bool status) {
-    /* Show Ctrl-Gui Swap options */
-    static const char PROGMEM logo[][2][3] = {
-        {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
-        {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
-    };
-    if (status) {
-        oled_write_ln_P(logo[0][0], false);
-        oled_write_ln_P(logo[0][1], false);
-    } else {
-        oled_write_ln_P(logo[1][0], false);
-        oled_write_ln_P(logo[1][1], false);
-    }
+  /* Show Ctrl-Gui Swap options */
+  static const char PROGMEM logo[][2][3] = {
+    {{0x97, 0x98, 0}, {0xb7, 0xb8, 0}},
+    {{0x95, 0x96, 0}, {0xb5, 0xb6, 0}},
+  };
+  if (status) {
+    oled_write_ln_P(logo[0][0], false);
+    oled_write_ln_P(logo[0][1], false);
+  } else {
+    oled_write_ln_P(logo[1][0], false);
+    oled_write_ln_P(logo[1][1], false);
+  }
 }
 
 void oled_render_logo(void) {
-    static const char PROGMEM crkbd_logo[] = {
-        0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
-        0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
-        0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
-        0};
-    oled_write_P(crkbd_logo, false);
+  static const char PROGMEM crkbd_logo[] = {
+    0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8a, 0x8b, 0x8c, 0x8d, 0x8e, 0x8f, 0x90, 0x91, 0x92, 0x93, 0x94,
+    0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0xaa, 0xab, 0xac, 0xad, 0xae, 0xaf, 0xb0, 0xb1, 0xb2, 0xb3, 0xb4,
+    0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0xca, 0xcb, 0xcc, 0xcd, 0xce, 0xcf, 0xd0, 0xd1, 0xd2, 0xd3, 0xd4,
+    0};
+  oled_write_P(crkbd_logo, false);
 }
 
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        oled_render_layer_state();
-        oled_render_keylog();
-    } else {
-        oled_render_logo();
-    }
-    return true;
+  if (is_keyboard_master()) {
+    oled_render_layer_state();
+    oled_render_keylog();
+  } else {
+    oled_render_logo();
+  }
+  return true;
 }
 #endif
