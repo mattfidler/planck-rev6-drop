@@ -26,8 +26,8 @@
 #    define STARTUP_SONG SONG(PLANCK_SOUND)
 // #define STARTUP_SONG SONG(NO_SOUND)
 
-#    define DEFAULT_LAYER_SONGS \
-        { SONG(QWERTY_SOUND), SONG(COLEMAK_SOUND), SONG(DVORAK_SOUND) }
+#    define DEFAULT_LAYER_SONGS                                     \
+  { SONG(QWERTY_SOUND), SONG(COLEMAK_SOUND), SONG(DVORAK_SOUND) }
 #endif
 
 /*
@@ -62,7 +62,7 @@
 #define TAPPING_FORCE_HOLD
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define TAPPING_TERM_PER_KEY
-#define IGNORE_MOD_TAP_INTERRUPT
+//#define IGNORE_MOD_TAP_INTERRUPT
 
 #define USB_MAX_POWER_CONSUMPTION USB_CONFIG_POWER_MA(100)
 
@@ -79,18 +79,18 @@
 #ifdef PLANCK
 #define USE_MUSE
 
-#define LAYOUT_matt( \
-       K00,   K01,   K02,   K03,   K04,   K05,   K06,   K07,   K08,   K09, \
-       K10,   K11,   K12,   K13,   K14,   K15,   K16,   K17,   K18,   K19, \
-       K20,   K21,   K22,   K23,   K24,   K25,   K26,   K27,   K28,   K29, \
-                     K30,   K31,   K32,   K33,   K34,   K35 \
-) \
-LAYOUT_planck_grid( \
-  K00,   K01,   K02,   K03, K04,  KC_NO, KC_NO, K05, K06, K07,     K08,   K09, \
-  K10,   K11,   K12,   K13, K14,  KC_NO, KC_NO, K15, K16, K17,     K18,   K19, \
-  K20,   K21,   K22,   K23, K24,  KC_NO, KC_NO, K25, K26, K27,     K28,   K29, \
-  KC_NO, KC_NO, KC_NO, K30, K31,    K32,   K33, K34, K35, KC_NO, KC_NO, KC_NO      \
-) 
+#define LAYOUT_matt(                                                    \
+                     K00,   K01,   K02,   K03,   K04,   K05,   K06,   K07,   K08,   K09, \
+                     K10,   K11,   K12,   K13,   K14,   K15,   K16,   K17,   K18,   K19, \
+                     K20,   K21,   K22,   K23,   K24,   K25,   K26,   K27,   K28,   K29, \
+                     K30,   K31,   K32,   K33,   K34,   K35             \
+                     )                                                  \
+  LAYOUT_planck_grid(                                                   \
+                      K00,   K01,   K02,   K03, K04,  KC_NO, KC_NO, K05, K06, K07,     K08,   K09, \
+                      K10,   K11,   K12,   K13, K14,  KC_NO, KC_NO, K15, K16, K17,     K18,   K19, \
+                      K20,   K21,   K22,   K23, K24,  KC_NO, KC_NO, K25, K26, K27,     K28,   K29, \
+                      KC_NO, KC_NO, KC_NO, K30, K31,    K32,   K33, K34, K35, KC_NO, KC_NO, KC_NO \
+                      )
 #endif
 
 #ifdef CRKBD
@@ -103,7 +103,7 @@ LAYOUT_planck_grid( \
 #   define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 // #   define RGB_MATRIX_LED_PROCESS_LIMIT (DRIVER_LED_TOTAL + 4) / 5 // limits the number of LEDs to process in an animation per task run (increases keyboard responsiveness)
 // #   define RGB_MATRIX_LED_FLUSH_LIMIT 16 // limits in milliseconds how frequently an animation will update the LEDs. 16 (16ms) is equivalent to limiting to 60fps (increases keyboard responsiveness)
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150 // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash. 
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150 // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash.
 #    define RGB_MATRIX_HUE_STEP 8
 #    define RGB_MATRIX_SAT_STEP 8
 #    define RGB_MATRIX_VAL_STEP 8
@@ -115,19 +115,19 @@ LAYOUT_planck_grid( \
 //#   define DISABLE_RGB_MATRIX_GRADIENT_UP_DOWN
 //#   define DISABLE_RGB_MATRIX_BREATHING
 //#   define DISABLE_RGB_MATRIX_CYCLE_ALL
- #   define DISABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
- #   define DISABLE_RGB_MATRIX_CYCLE_UP_DOWN
- #   define DISABLE_RGB_MATRIX_CYCLE_OUT_IN
- #   define DISABLE_RGB_MATRIX_CYCLE_OUT_IN_DUAL
- #   define DISABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
- #   define DISABLE_RGB_MATRIX_DUAL_BEACON
- #   define DISABLE_RGB_MATRIX_RAINBOW_BEACON
- #   define DISABLE_RGB_MATRIX_RAINBOW_PINWHEELS
- #   define DISABLE_RGB_MATRIX_RAINDROPS
- #   define DISABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS
- #   define DISABLE_RGB_MATRIX_TYPING_HEATMAP
- #   define DISABLE_RGB_MATRIX_DIGITAL_RAIN
- #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE
+#   define DISABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
+#   define DISABLE_RGB_MATRIX_CYCLE_UP_DOWN
+#   define DISABLE_RGB_MATRIX_CYCLE_OUT_IN
+#   define DISABLE_RGB_MATRIX_CYCLE_OUT_IN_DUAL
+#   define DISABLE_RGB_MATRIX_RAINBOW_MOVING_CHEVRON
+#   define DISABLE_RGB_MATRIX_DUAL_BEACON
+#   define DISABLE_RGB_MATRIX_RAINBOW_BEACON
+#   define DISABLE_RGB_MATRIX_RAINBOW_PINWHEELS
+#   define DISABLE_RGB_MATRIX_RAINDROPS
+#   define DISABLE_RGB_MATRIX_JELLYBEAN_RAINDROPS
+#   define DISABLE_RGB_MATRIX_TYPING_HEATMAP
+#   define DISABLE_RGB_MATRIX_DIGITAL_RAIN
+#   define DISABLE_RGB_MATRIX_SOLID_REACTIVE
 // #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 // #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE
 // #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
@@ -135,23 +135,23 @@ LAYOUT_planck_grid( \
 // #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_MULTICROSS
 // #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_NEXUS
 // #   define DISABLE_RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS
- #   define DISABLE_RGB_MATRIX_SPLASH
- #   define DISABLE_RGB_MATRIX_MULTISPLASH
- #   define DISABLE_RGB_MATRIX_SOLID_SPLASH
- #   define DISABLE_RGB_MATRIX_SOLID_MULTISPLASH
+#   define DISABLE_RGB_MATRIX_SPLASH
+#   define DISABLE_RGB_MATRIX_MULTISPLASH
+#   define DISABLE_RGB_MATRIX_SOLID_SPLASH
+#   define DISABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif // RGB_MATRIX_ENABLE
-#define LAYOUT_matt( \
-       K00,   K01,   K02,   K03,   K04,   K05,   K06,   K07,   K08,   K09, \
-       K10,   K11,   K12,   K13,   K14,   K15,   K16,   K17,   K18,   K19, \
-       K20,   K21,   K22,   K23,   K24,   K25,   K26,   K27,   K28,   K29, \
-                     K30,   K31,   K32,   K33,   K34,   K35 \
-) \
-LAYOUT_split_3x5_3( \
-  K00,   K01,   K02, K03, K04,  K05, K06, K07, K08,   K09, \
-  K10,   K11,   K12, K13, K14,  K15, K16, K17, K18,   K19, \
-  K20,   K21,   K22, K23, K24,  K25, K26, K27, K28,   K29, \
-  K30, K31, K32,  K33, K34, K35 \
-)
+#define LAYOUT_matt(                                                    \
+                     K00,   K01,   K02,   K03,   K04,   K05,   K06,   K07,   K08,   K09, \
+                     K10,   K11,   K12,   K13,   K14,   K15,   K16,   K17,   K18,   K19, \
+                     K20,   K21,   K22,   K23,   K24,   K25,   K26,   K27,   K28,   K29, \
+                     K30,   K31,   K32,   K33,   K34,   K35             \
+                     )                                                  \
+  LAYOUT_split_3x5_3(                                                   \
+                      K00,   K01,   K02, K03, K04,  K05, K06, K07, K08,   K09, \
+                      K10,   K11,   K12, K13, K14,  K15, K16, K17, K18,   K19, \
+                      K20,   K21,   K22, K23, K24,  K25, K26, K27, K28,   K29, \
+                      K30, K31, K32,  K33, K34, K35                     \
+                      )
 
 #define USE_SERIAL_PD2
 
@@ -160,19 +160,19 @@ LAYOUT_split_3x5_3( \
 #endif // CRKBD
 
 #ifdef MOON
-#define LAYOUT_matt( \
-       K00,   K01,   K02,   K03,   K04,   K05,   K06,   K07,   K08,   K09, \
-       K10,   K11,   K12,   K13,   K14,   K15,   K16,   K17,   K18,   K19, \
-       K20,   K21,   K22,   K23,   K24,   K25,   K26,   K27,   K28,   K29, \
-                     K30,   K31,   K32,   K33,   K34,   K35 \
-) \
-  LAYOUT_moonlander( \
-        K00,   K01,    K02,    K03,    K04,  KC_NO,    KC_NO,           KC_NO, KC_NO,    K05,  K06,   K07,    K08,     K09, \
-        K10,   K11,    K12,    K13,    K14,  KC_NO,    KC_NO,           KC_NO, KC_NO,    K15,  K16,   K17,    K18,     K19, \
-        K20,   K21,    K22,    K23,    K24,  KC_NO,    KC_NO,           KC_NO, KC_NO,    K25,  K26,   K27,    K28,     K29, \
-        KC_NO, KC_NO,  KC_NO,  K30,    K31,  K32,      K33,             K34,  K35,   KC_NO,  KC_NO, KC_NO, \
-        KC_NO, KC_NO,  KC_NO,KC_NO,  KC_NO,  KC_NO, KC_NO,  KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, \
-                                             KC_NO, KC_NO,  KC_NO,         KC_NO, KC_NO,  KC_NO )
+#define LAYOUT_matt(                                                    \
+                     K00,   K01,   K02,   K03,   K04,   K05,   K06,   K07,   K08,   K09, \
+                     K10,   K11,   K12,   K13,   K14,   K15,   K16,   K17,   K18,   K19, \
+                     K20,   K21,   K22,   K23,   K24,   K25,   K26,   K27,   K28,   K29, \
+                     K30,   K31,   K32,   K33,   K34,   K35             \
+                     )                                                  \
+  LAYOUT_moonlander(                                                    \
+                     K00,   K01,    K02,    K03,    K04,  KC_NO,    KC_NO,           KC_NO, KC_NO,    K05,  K06,   K07,    K08,     K09, \
+                     K10,   K11,    K12,    K13,    K14,  KC_NO,    KC_NO,           KC_NO, KC_NO,    K15,  K16,   K17,    K18,     K19, \
+                     K20,   K21,    K22,    K23,    K24,  KC_NO,    KC_NO,           KC_NO, KC_NO,    K25,  K26,   K27,    K28,     K29, \
+                     KC_NO, KC_NO,  KC_NO,  K30,    K31,  K32,      K33,             K34,  K35,   KC_NO,  KC_NO, KC_NO, \
+                     KC_NO, KC_NO,  KC_NO,KC_NO,  KC_NO,  KC_NO, KC_NO,  KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO, \
+                     KC_NO, KC_NO,  KC_NO,         KC_NO, KC_NO,  KC_NO )
 
 #define ORYX_CONFIGURATOR
 #define USB_SUSPEND_WAKEUP_DELAY 0

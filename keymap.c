@@ -21,7 +21,6 @@
 #endif
 #include "version.h"
 
-
 enum planck_layers {
   _COLEMAK,
   _MOUSE,
@@ -67,7 +66,7 @@ enum planck_keycodes {
 #define LT_SPC  LT(_MOVE,      KC_SPACE)
 #define LT_TAB    LT(_MOUSE,     KC_TAB)
 #define LT_ESC LT(_MEDIA,     KC_ESCAPE)
-#define LT_BSP LT(_NUM,       KC_BSPACE)
+#define LT_BSP LT(_NUM,       KC_BACKSPACE)
 #define LT_RET  LT(_SYM,       KC_ENTER)
 #define LT_DEL LT(_FN,        KC_DELETE)
 #define LT_F      KC_F
@@ -108,10 +107,10 @@ enum planck_keycodes {
 #define MS_2 KC_MS_BTN2
 #define MS_3 KC_MS_BTN3
 
-#define QLSHIFT KC_LSHIFT
-#define QRSHIFT KC_RSHIFT
-#define QLCTRL KC_LCTRL
-#define QLALT  KC_LALT
+#define QLSHIFT KC_LEFT_SHIFT
+#define QRSHIFT KC_RIGHT_SHIFT
+#define QLCTRL KC_LEFT_CTRL
+#define QLALT  KC_LEFT_ALT
 #define QLGUI KC_LGUI
 #define QRALT KC_RALT
 
@@ -122,9 +121,10 @@ enum planck_keycodes {
 #define REDO LCTL(KC_Y)
 
 #define Q_INS KC_INSERT
-#define PG_DOWN KC_PGDOWN
+#define PG_DOWN KC_PAGE_DOWN
 #define Q_RIGHT KC_RIGHT
-#define Q_CAPS KC_CAPSLOCK
+#define Q_CAPS QK_CAPS_WORD_TOGGLE
+#define KC_BSPACE KC_BACKSPACE
 
 #define VOL_UP KC_AUDIO_VOL_UP
 #define PREV KC_MEDIA_PREV_TRACK
@@ -134,8 +134,14 @@ enum planck_keycodes {
 #define PLAY KC_MEDIA_PLAY_PAUSE
 #define STOP KC_MEDIA_STOP
 
-#define LBRACKET KC_LBRACKET
-#define RBRACKET KC_RBRACKET
+#define LBRACKET KC_LEFT_BRACKET
+#define RBRACKET KC_RIGHT_BRACKET
+#define KC_SCOLON KC_SEMICOLON
+#define KC_BSLASH KC_BACKSLASH
+#define KC_PSCREEN KC_SYSTEM_REQUEST
+#define KC_SCROLLLOCK KC_SCROLL_LOCK
+#define KC_RSHIFT KC_RIGHT_SHIFT
+#define KC_LSHIFT KC_LEFT_SHIFT
 
 #define APPS KC_APPLICATION
 
@@ -618,7 +624,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #ifdef MOUSEKEY_ENABLE
       tap_code(KC_MS_WH_DOWN);
 #else
-      tap_code(KC_PGDN);
+      tap_code(KC_PAGE_DOWN);
 #endif
     } else {
 #ifdef MOUSEKEY_ENABLE
